@@ -193,6 +193,76 @@ export default function OpenInnovationPage() {
           </div>
         </div>
       </section>
+
+      {/* ---------- NATIONAL FUNDING PROGRAMMES ---------- */}
+      <section className="section soft">
+        <div className="wrap">
+          <Reveal>
+            <RuleTitle
+              kicker={t("oi_funding_kicker")}
+              title={t("oi_funding_title")}
+              sub={t("oi_funding_sub")}
+            />
+          </Reveal>
+          <div className="funding-grid">
+            <Reveal>
+              <div className="funding-card">
+                <span className="funding-tag">{t("oi_funding_1_tag")}</span>
+                <h3>{t("oi_funding_1_name")}</h3>
+                <p className="funding-org">{t("oi_funding_1_org")}</p>
+                <p className="funding-desc">{t("oi_funding_1_desc")}</p>
+                <div className="funding-links">
+                  <a
+                    href="https://www.startupsg.gov.sg/programmes/4897/startup-sg-tech"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline btn-sm"
+                  >
+                    {t("oi_funding_1_learn")}
+                  </a>
+                  <a
+                    href="https://www.startupsg.gov.sg/programmes/4897/startup-sg-tech/apply"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-orange btn-sm"
+                  >
+                    {t("oi_funding_1_apply")} <span className="arr">→</span>
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={60}>
+              <div className="funding-card">
+                <span className="funding-tag">{t("oi_funding_2_tag")}</span>
+                <h3>{t("oi_funding_2_name")}</h3>
+                <p className="funding-org">{t("oi_funding_2_org")}</p>
+                <p className="funding-desc">{t("oi_funding_2_desc")}</p>
+                <div className="funding-links">
+                  <a
+                    href="https://aisingapore.org/innovation/100e/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline btn-sm"
+                  >
+                    {t("oi_funding_2_learn")}
+                  </a>
+                  <a
+                    href="https://aisingapore.org/innovation/100e/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-orange btn-sm"
+                  >
+                    {t("oi_funding_2_apply")} <span className="arr">→</span>
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+          <p className="sample-note" style={{ marginTop: 22 }}>
+            {t("oi_funding_note")}
+          </p>
+        </div>
+      </section>
     </>
   );
 }
