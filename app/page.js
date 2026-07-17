@@ -17,6 +17,18 @@ export default function Home() {
     <>
       {/* ---------- HERO ---------- */}
       <header className="hero">
+        <video
+          className="hero-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/videos/hero-poster.jpg"
+          aria-hidden="true"
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-scrim" aria-hidden="true" />
         <svg className="hero-mark" width="520" height="520" viewBox="0 0 100 100" fill="none" aria-hidden="true">
           <path d="M50 6 L86 34 L72 78 L28 78 L14 34 Z" stroke="#fff" strokeWidth="0.9" />
           <path d="M50 94 L14 66 L28 22 L72 22 L86 66 Z" stroke="#fff" strokeWidth="0.9" />
