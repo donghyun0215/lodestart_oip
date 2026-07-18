@@ -53,11 +53,11 @@ export default function Home() {
               <span>{t("stat_cohort")}</span>
             </div>
             <div>
-              <b>4</b>
+              <b>{STARTUPS.length}</b>
               <span>{t("stat_companies")}</span>
             </div>
             <div>
-              <b>5</b>
+              <b>{ORGS.length}</b>
               <span>{t("stat_orgs")}</span>
             </div>
             <div>
@@ -75,10 +75,10 @@ export default function Home() {
             <RuleTitle kicker={t("pos_kicker")} title={t("pos_title")} sub={t("pos_sub")} />
           </Reveal>
           <div className="num-grid">
-            <NumCard n="01" title={t("pos_1_t")} desc={t("pos_1_d")} />
-            <NumCard n="02" title={t("pos_2_t")} desc={t("pos_2_d")} />
-            <NumCard n="03" title={t("pos_3_t")} desc={t("pos_3_d")} />
-            <NumCard n="04" title={t("pos_4_t")} desc={t("pos_4_d")} />
+            <Reveal><NumCard n="01" title={t("pos_1_t")} desc={t("pos_1_d")} /></Reveal>
+            <Reveal delay={60}><NumCard n="02" title={t("pos_2_t")} desc={t("pos_2_d")} /></Reveal>
+            <Reveal delay={120}><NumCard n="03" title={t("pos_3_t")} desc={t("pos_3_d")} /></Reveal>
+            <Reveal delay={180}><NumCard n="04" title={t("pos_4_t")} desc={t("pos_4_d")} /></Reveal>
           </div>
         </div>
       </section>

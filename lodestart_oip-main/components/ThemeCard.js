@@ -191,6 +191,7 @@ function Art({ kind }) {
   const p = PALETTE[kind] ?? PALETTE.ai;
   const gid = `theme-bg-${kind}`;
   const fade = `theme-fade-${kind}`;
+  const grain = `theme-grain-${kind}`;
 
   return (
     <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -203,6 +204,10 @@ function Art({ kind }) {
           <stop offset="50%" stopColor="#000" stopOpacity="0" />
           <stop offset="100%" stopColor="#000" stopOpacity="0.5" />
         </linearGradient>
+        <filter id={grain}>
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
       </defs>
       <rect width="400" height="225" fill={`url(#${gid})`} />
       <Motif kind={kind} ink={p.ink} />
@@ -210,6 +215,7 @@ function Art({ kind }) {
         <rect x="0" y="0" width="60" height="60" rx="18" strokeWidth="2" transform="rotate(22 30 30)" />
         <rect x="0" y="0" width="60" height="60" rx="18" strokeWidth="2" transform="rotate(-22 30 30)" />
       </g>
+      <rect width="400" height="225" filter={`url(#${grain})`} opacity="0.055" />
       <rect width="400" height="225" fill={`url(#${fade})`} />
     </svg>
   );
