@@ -312,6 +312,7 @@ h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.18; }
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   padding: 34px 32px 32px;
+  height: 100%;
 }
 .num-card .num-badge { margin-bottom: 40px; }
 .num-card h3 { font-size: 1.22rem; font-weight: 500; margin-bottom: 10px; }
@@ -325,6 +326,7 @@ h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.18; }
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   padding: 30px 28px 28px;
+  height: 100%;
 }
 .pain-mark {
   display: block;
@@ -351,6 +353,7 @@ h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.18; }
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: var(--radius-lg);
   padding: 22px 20px 20px;
+  height: 100%;
 }
 .flow-step h3 { font-size: 1.02rem; font-weight: 600; margin: 14px 0 8px; }
 .flow-step p { font-size: 13px; color: rgba(255,255,255,0.62); line-height: 1.55; }
