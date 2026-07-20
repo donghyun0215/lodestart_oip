@@ -68,6 +68,28 @@ export default function Home() {
         </div>
       </header>
 
+      {/* ---------- SWIMMY INTRO ---------- */}
+      <section className="section">
+        <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 48, alignItems: "center" }}>
+          <Reveal>
+            <span className="kicker">{t("sw_kicker")}</span>
+            <h2 className="h-section" style={{ margin: "14px 0 18px", lineHeight: 1.15 }}>
+              {t("sw_line_a")}
+              <br />
+              <em style={{ color: "var(--orange)", fontStyle: "normal" }}>{t("sw_line_b")}</em>
+            </h2>
+            <p className="sub">{t("sw_body")}</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <img
+              src="/covers/swimmy-bigfish.jpg"
+              alt="Many small fish swimming together in the shape of one big fish"
+              style={{ width: "100%", borderRadius: 16, display: "block" }}
+            />
+          </Reveal>
+        </div>
+      </section>
+
       {/* ---------- POSITIONING ---------- */}
       <section className="section">
         <div className="wrap">

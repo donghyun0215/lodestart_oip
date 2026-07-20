@@ -4,9 +4,9 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "LodestarT — PoC & Open Innovation",
+  title: "K-Innovation Partners — PoC & Open Innovation",
   description:
-    "Where innovative startup solutions meet global market leaders. LodestarT connects Korea's proven companies with Singapore's institutions through curated proof-of-concept engagements.",
+    "Where innovative startup solutions meet global market leaders. K-Innovation Partners connects Korea's proven companies with Singapore's institutions through curated proof-of-concept engagements.",
 };
 
 export default function RootLayout({ children }) {

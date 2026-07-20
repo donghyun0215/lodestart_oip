@@ -1090,7 +1090,7 @@ footer {
   inset: 0;
   background:
     linear-gradient(to top, rgba(10, 10, 10, 0.72) 0%, rgba(10, 10, 10, 0.18) 42%, rgba(10, 10, 10, 0.05) 100%),
-    linear-gradient(120deg, rgba(13, 10, 26, 0.30), rgba(226, 99, 46, 0.10));
+    linear-gradient(120deg, rgba(13, 10, 26, 0.30), rgba(124, 58, 237, 0.10));
   pointer-events: none;
 }
 .c-card:hover .c-cover img { transform: scale(1.04); }
