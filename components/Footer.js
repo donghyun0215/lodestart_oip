@@ -14,14 +14,18 @@ export default function Footer() {
 
         <div className="foot-grid">
           <div>
-            <h4>{t("ft_navigate")}</h4>
-            <Link href="/startups">{t("nav_companies")}</Link>
+            <h4>{t("ft_platform")}</h4>
+            <Link href="/startups">{t("ft_for_startups")}</Link>
             <Link href="/open-innovation">{t("nav_oi")}</Link>
-            <Link href="/services">{t("nav_engagement")}</Link>
             <a href="https://community.lodestart.ai" target="_blank" rel="noopener noreferrer">
               {t("ft_community")}
             </a>
-            <Link href="/contact">{t("nav_contact")}</Link>
+          </div>
+
+          <div>
+            <h4>{t("ft_services")}</h4>
+            <Link href="/newsletter">{t("ft_briefing")}</Link>
+            <Link href="/outreach">{t("ft_matchmaking")}</Link>
           </div>
 
           <div>
@@ -50,7 +54,7 @@ export default function Footer() {
 
         <div className="foot-base">
           <span>{t("ft_rights")}</span>
-          <span>SINGAPORE · KOREA</span>
+          <span className="foot-byintro">{t("ft_byintro")}</span>
         </div>
       </div>
     </footer>

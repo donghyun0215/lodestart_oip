@@ -8,6 +8,8 @@ import Marquee from "@/components/Marquee";
 import Reveal from "@/components/Reveal";
 import { useLang } from "@/components/LanguageProvider";
 
+const PILLAR_LINK = { 1: "/startups", 2: "/open-innovation", 3: "/events", 4: "/newsletter", 5: "/outreach" };
+
 export default function Home() {
   const { t, p } = useLang();
   const featured = STARTUPS.slice(0, 3);
@@ -49,20 +51,20 @@ export default function Home() {
           </div>
           <div className="hero-stats">
             <div>
-              <b>FINNECT</b>
-              <span>{t("stat_cohort")}</span>
-            </div>
-            <div>
-              <b>{STARTUPS.length}</b>
+              <b>120+</b>
               <span>{t("stat_companies")}</span>
             </div>
             <div>
-              <b>{ORGS.length}</b>
+              <b>40+</b>
               <span>{t("stat_orgs")}</span>
             </div>
             <div>
-              <b>KR ↔ SG</b>
-              <span>{t("stat_corridor")}</span>
+              <b>18</b>
+              <span>{t("stat_pilots")}</span>
+            </div>
+            <div>
+              <b>S$92M+</b>
+              <span>{t("stat_funding")}</span>
             </div>
           </div>
         </div>
@@ -90,17 +92,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- POSITIONING ---------- */}
+      {/* ---------- FIVE PILLARS ---------- */}
       <section className="section">
         <div className="wrap">
           <Reveal>
-            <RuleTitle kicker={t("pos_kicker")} title={t("pos_title")} sub={t("pos_sub")} />
+            <RuleTitle kicker={t("pil_kicker")} title={t("pil_title")} />
           </Reveal>
-          <div className="num-grid">
-            <Reveal><NumCard n="01" title={t("pos_1_t")} desc={t("pos_1_d")} /></Reveal>
-            <Reveal delay={60}><NumCard n="02" title={t("pos_2_t")} desc={t("pos_2_d")} /></Reveal>
-            <Reveal delay={120}><NumCard n="03" title={t("pos_3_t")} desc={t("pos_3_d")} /></Reveal>
-            <Reveal delay={180}><NumCard n="04" title={t("pos_4_t")} desc={t("pos_4_d")} /></Reveal>
+          <div className="pillar-grid">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <Reveal key={i} delay={(i - 1) * 60}>
+                <article className="pillar">
+                  <img className="pillar-img" src={`/covers/pillar-${i}.jpg`} alt="" />
+                  <div className="pillar-body">
+                    <span className="pillar-n">{`0${i}`}</span>
+                    <span className="pillar-pill">{t(`pil_${i}_t`)}</span>
+                    <p>{t(`pil_${i}_d`)}</p>
+                    <Link href={PILLAR_LINK[i]} className="pillar-link">
+                      {t("pil_explore")} <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -165,7 +178,7 @@ export default function Home() {
             ))}
           </div>
           <div style={{ marginTop: 44 }}>
-            <Link href="/services" className="btn btn-orange">
+            <Link href="/contact" className="btn btn-orange">
               {t("flow_cta")} <span className="arr">→</span>
             </Link>
           </div>
@@ -189,19 +202,35 @@ export default function Home() {
         <Marquee items={PARTNERS} speed={40} reverse />
       </section>
 
-      {/* ---------- CTA ---------- */}
+      {/* ---------- ACCESS ---------- */}
       <section className="section soft">
-        <div className="wrap" style={{ textAlign: "center", maxWidth: 700 }}>
-          <span className="kicker">{t("cta_kicker")}</span>
-          <h2 className="h-section" style={{ margin: "14px 0 16px" }}>
-            {t("cta_title")}
-          </h2>
-          <p className="sub" style={{ margin: "0 auto 32px" }}>
-            {t("cta_sub")}
-          </p>
-          <Link href="/contact" className="btn btn-black">
-            {t("cta_btn")} <span className="arr">→</span>
-          </Link>
+        <div className="wrap">
+          <div className="access-card">
+            <span className="kicker">{t("acc_kicker")}</span>
+            <h2 className="h-section" style={{ margin: "14px 0 14px" }}>{t("acc_title")}</h2>
+            <p className="sub" style={{ marginBottom: 30 }}>{t("acc_sub")}</p>
+            <div className="access-grid">
+              <div className="access-box">
+                <span className="access-eyebrow">{t("acc_s_kicker")}</span>
+                <h3>{t("acc_s_title")}</h3>
+                <p>{t("acc_s_desc")}</p>
+                <Link href="/startups" className="btn btn-orange btn-sm">
+                  {t("acc_s_cta")} <span className="arr">→</span>
+                </Link>
+              </div>
+              <div className="access-box">
+                <span className="access-eyebrow">{t("acc_i_kicker")}</span>
+                <h3>{t("acc_i_title")}</h3>
+                <p>{t("acc_i_desc")}</p>
+                <Link href="/contact" className="btn btn-orange btn-sm">
+                  {t("acc_i_cta")} <span className="arr">→</span>
+                </Link>
+              </div>
+            </div>
+            <Link href="/contact" className="btn btn-outline btn-sm" style={{ marginTop: 26 }}>
+              {t("acc_cta2")}
+            </Link>
+          </div>
         </div>
       </section>
     </>

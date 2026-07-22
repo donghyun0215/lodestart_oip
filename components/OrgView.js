@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ORGS, STARTUPS } from "@/lib/data";
-import CallChart from "@/components/CallChart";
 import { useLang } from "@/components/LanguageProvider";
 
 export default function OrgView({ slug }) {
@@ -60,61 +59,7 @@ export default function OrgView({ slug }) {
       </header>
 
       {/* ---------- STATS ---------- */}
-      <section className="section soft" style={{ paddingBottom: 40 }}>
-        <div className="wrap">
-          <h2 style={{ fontSize: "1.1rem", fontWeight: 600, marginBottom: 18 }}>{t("org_past12")}</h2>
-          <div className="stat-tiles">
-            <div className="stat-tile">
-              <span>{t("org_calls_published")}</span>
-              <b>{o.stats.calls}</b>
-            </div>
-            <div className="stat-tile">
-              <span>{t("org_funding_committed")}</span>
-              <b>{o.stats.funding}</b>
-            </div>
-            <div className="stat-tile">
-              <span>{t("org_projects_awarded")}</span>
-              <b>{o.stats.awarded}</b>
-            </div>
-            <div className="stat-tile">
-              <span>{t("org_awarded_value")}</span>
-              <b>{o.stats.awardedValue}</b>
-            </div>
-          </div>
-
-          <div className="chart-panel">
-            <h4>{t("org_chart_title")}</h4>
-            <div className="legend">
-              <span>
-                <i style={{ background: "var(--orange-badge-bg)", border: "1px solid var(--orange-badge)" }} />
-                {t("org_legend_calls")}
-              </span>
-              <span>
-                <i style={{ background: "var(--orange)" }} />
-                {t("org_legend_funding")}
-              </span>
-            </div>
-            <CallChart data={o.monthly} />
-          </div>
-
-          <div className="num-grid">
-            <div className="num-card">
-              <span className="num-badge">01</span>
-              <h3>{t("org_cadence")}</h3>
-              <p>{p(o, "cadence")}</p>
-            </div>
-            <div className="num-card">
-              <span className="num-badge">02</span>
-              <h3>{t("org_engage")}</h3>
-              <p>{p(o, "engagement")}</p>
-            </div>
-          </div>
-
-          <p className="sample-note">
-            {t("org_sample")}
-          </p>
-        </div>
-      </section>
+      
 
       {/* ---------- OPEN CALLS ---------- */}
       <section className="section">

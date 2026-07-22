@@ -15,7 +15,9 @@ export default function Nav() {
     { href: "/", label: t("nav_home") },
     { href: "/startups", label: t("nav_companies") },
     { href: "/open-innovation", label: t("nav_oi") },
-    { href: "/services", label: t("nav_engagement") },
+    { href: "/events", label: t("nav_events") },
+    { href: "/newsletter", label: t("nav_newsletter") },
+    { href: "/outreach", label: t("nav_outreach") },
   ];
 
   return (

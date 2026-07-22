@@ -35,16 +35,6 @@ export default function OrgRow({ o }) {
           </div>
         </div>
       </div>
-      <div className="org-stats">
-        <div>
-          <b>{o.stats.calls}</b>
-          <span>{t("oi_calls_12mo")}</span>
-        </div>
-        <div>
-          <b>{o.stats.funding}</b>
-          <span>{t("oi_funding")}</span>
-        </div>
-      </div>
     </Link>
   );
 }
