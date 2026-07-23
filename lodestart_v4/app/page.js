@@ -84,11 +84,16 @@ export default function Home() {
             <p className="sub" style={{ marginTop: 16 }}>{t("sw_body2")}</p>
           </Reveal>
           <Reveal delay={80}>
-            <img
-              src="/covers/swimmy-bigfish.jpg"
-              alt="Many small fish swimming together in the shape of one big fish"
-              style={{ width: "100%", borderRadius: 16, display: "block" }}
-            />
+            {/* Two nested loops at co-prime periods (9.7s drift / 6.3s sway) so the
+                combined motion only repeats every ~61s — it never reads as a GIF loop.
+                Killed automatically by the global prefers-reduced-motion rule. */}
+            <div className="swimmy-art">
+              <img
+                className="swimmy-fish"
+                src="/covers/swimmy-bigfish.jpg"
+                alt="Many small fish swimming together in the shape of one big fish"
+              />
+            </div>
           </Reveal>
         </div>
       </section>

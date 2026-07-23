@@ -7,9 +7,9 @@
 export const STRINGS = {
   en: {
     sw_body2: "Backed by the Embassy of the Republic of Korea, KOCHAM, and leading national agencies (KSC, NIPA, KOCCA, KTO), we bring Korea's boldest innovators to the global stage through structured PoCs, pilot deployments, AI-driven outreach, and high-impact demo days.",
-    nav_events: "K-Startups Events",
+    nav_events: "Events",
     nav_newsletter: "Newsletter",
-    nav_outreach: "Outreach Service",
+    nav_outreach: "Outreach",
     ev_kicker: "K-Startups Community",
     ev_title_a: "Amplify the power of",
     ev_title_b: "collective voices",
@@ -356,9 +356,9 @@ export const STRINGS = {
 
   ko: {
     sw_body2: "주싱가포르 대한민국 대사관, KOCHAM, 그리고 KSC·NIPA·KOCCA·KTO 등 주요 국가기관의 지원을 바탕으로, 체계적인 PoC와 파일럿 실증, AI 기반 아웃리치, 임팩트 있는 데모데이를 통해 한국의 가장 대담한 혁신 기업을 글로벌 무대로 이끕니다.",
-    nav_events: "K-스타트업 이벤트",
+    nav_events: "이벤트",
     nav_newsletter: "뉴스레터",
-    nav_outreach: "아웃리치 서비스",
+    nav_outreach: "아웃리치",
     ev_kicker: "K-스타트업 커뮤니티",
     ev_title_a: "함께일 때 커지는",
     ev_title_b: "목소리의 힘",
