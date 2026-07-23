@@ -1,12 +1,13 @@
 "use client";
+import Image from "next/image";
 import { useLang } from "./LanguageProvider";
 
 /* ------------------------------------------------------------------
    Theme cover art — composed SVG, same pattern as ChallengeCard.js.
-   Duotone indigo→coral (the site's brand gradient) with a motif per
-   theme. To swap in a real photo later, add `image: "/covers/xxx.jpg"`
-   to the theme in lib/data.js and wire an <Image> branch here the
-   same way ChallengeCard.js does it.
+   Used as the FALLBACK when a theme has no `image` field. Themes that
+   set `image: "/covers/themes/xxx.jpg"` in lib/data.js render the
+   photograph instead (same pattern as ChallengeCard.js); remove the
+   field to fall back to the composed art below.
 ------------------------------------------------------------------- */
 
 const PALETTE = {
@@ -227,7 +228,18 @@ export default function ThemeCard({ theme, active, count, onSelect }) {
   return (
     <button type="button" className={`theme-card ${active ? "active" : ""}`} onClick={onSelect}>
       <span className="theme-cover">
-        <Art kind={theme.cover} />
+        {theme.image ? (
+          <Image
+            src={theme.image}
+            alt=""
+            fill
+            sizes="(max-width: 660px) 100vw, (max-width: 1020px) 50vw, 33vw"
+            style={{ objectFit: "cover" }}
+          />
+        ) : (
+          <Art kind={theme.cover} />
+        )}
+        <span className="theme-cover-scrim" aria-hidden="true" />
         <span className="theme-count">
           {count} {count === 1 ? t("theme_company_one") : t("theme_company_many")}
         </span>

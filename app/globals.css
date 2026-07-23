@@ -12,8 +12,8 @@
   --orange-dark: #16a34a;
   --orange-badge: #86efac;    /* lighter indigo tint for strokes/fills */
   --orange-badge-bg: #ecfdf5;
-  --accent-2: #ff5c7a;        /* coral — pairs with indigo for the brand gradient */
-  --gradient-brand: linear-gradient(135deg, var(--orange) 0%, var(--accent-2) 100%);
+  --accent-2: #4ade80;        /* light green — pairs with the brand green */
+  --gradient-brand: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
   --green-star: #7ede4e;      /* the green star on the LodestarT wordmark */
   --bg: #ffffff;
   --bg-soft: #f7f7f5;
@@ -333,7 +333,7 @@ h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.18; }
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--accent-2);
+  color: var(--orange);
   margin-bottom: 18px;
 }
 .pain-card h3 { font-size: 1.12rem; font-weight: 600; margin-bottom: 10px; }
@@ -496,8 +496,20 @@ h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.18; }
   aspect-ratio: 16 / 9;
   display: block;
   flex-shrink: 0;
+  overflow: hidden;
+  background: #0d0a1a;
 }
 .theme-cover svg { width: 100%; height: 100%; display: block; }
+.theme-cover img { transition: transform 0.35s ease; }
+.theme-card:hover .theme-cover img { transform: scale(1.045); }
+.theme-cover-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(10, 10, 10, 0.62) 0%, rgba(10, 10, 10, 0.14) 45%, rgba(10, 10, 10, 0.04) 100%),
+    linear-gradient(120deg, rgba(13, 10, 26, 0.22), rgba(34, 197, 94, 0.10));
+  pointer-events: none;
+}
 .theme-count {
   position: absolute;
   left: 14px; bottom: 12px;
@@ -1202,3 +1214,24 @@ html[lang="ko"] .org-desc { word-break: keep-all; }
 .nl-input{width:100%;padding:12px 15px;border:1px solid var(--line);border-radius:9px;
   font-size:14.5px;font-family:inherit;background:#fff;margin-bottom:12px}
 .nl-fine{font-size:11.5px;color:var(--ink-faint);margin-top:12px;line-height:1.5}
+
+
+/* pillar cards — equal height, grey border that greens on hover */
+.pillar-grid{align-items:stretch}
+.pillar-grid > *{height:100%}
+.pillar{height:100%;border-color:var(--line);
+  transition:border-color .22s ease, box-shadow .22s ease, transform .22s ease}
+.pillar:hover{border-color:var(--orange);box-shadow:0 10px 30px rgba(34,197,94,.13);transform:translateY(-3px)}
+.pillar-body{display:flex;flex-direction:column;flex:1}
+.pillar-body p{flex:1}
+.pillar-link{margin-top:16px}
+.pillar-img{transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.pillar-imgwrap{overflow:hidden}
+.pillar:hover .pillar-img{transform:scale(1.05)}
+.pillar-pill{transition:background .22s ease,color .22s ease}
+.pillar:hover .pillar-pill{background:var(--orange);color:#fff}
+
+/* same treatment for the feature cards on events / outreach */
+.feat-card{transition:border-color .22s ease, box-shadow .22s ease, transform .22s ease}
+.feat-card:hover{border-color:var(--orange);box-shadow:0 10px 30px rgba(34,197,94,.13);transform:translateY(-3px)}
+.pillar-imgwrap{display:block;width:100%;overflow:hidden;line-height:0}

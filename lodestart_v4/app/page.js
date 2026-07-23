@@ -81,6 +81,7 @@ export default function Home() {
               <em style={{ color: "var(--orange)", fontStyle: "normal" }}>{t("sw_line_b")}</em>
             </h2>
             <p className="sub">{t("sw_body")}</p>
+            <p className="sub" style={{ marginTop: 16 }}>{t("sw_body2")}</p>
           </Reveal>
           <Reveal delay={80}>
             <img
@@ -102,7 +103,9 @@ export default function Home() {
             {[1, 2, 3, 4, 5].map((i) => (
               <Reveal key={i} delay={(i - 1) * 60}>
                 <article className="pillar">
-                  <img className="pillar-img" src={`/covers/pillar-${i}.jpg`} alt="" />
+                  <span className="pillar-imgwrap">
+                    <img className="pillar-img" src={`/covers/pillar-${i}.jpg`} alt="" />
+                  </span>
                   <div className="pillar-body">
                     <span className="pillar-n">{`0${i}`}</span>
                     <span className="pillar-pill">{t(`pil_${i}_t`)}</span>
