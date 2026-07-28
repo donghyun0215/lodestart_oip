@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { STARTUPS } from "@/lib/data";
 import { Banner } from "@/components/Bits";
 import { useLang } from "@/components/LanguageProvider";
+import TeamMember from "@/components/TeamMember";
 
 function Section({ title, children }) {
   return (
@@ -56,49 +57,10 @@ export default function StartupView({ slug }) {
 
               {s.team.length > 0 && (
                 <Section title={t("d_team")}>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",
-                      gap: 14,
-                    }}
-                  >
-                    {s.team.map((t) => (
-                      <div
-                        key={t.name}
-                        style={{
-                          border: "1px solid var(--line)",
-                          borderRadius: "var(--radius)",
-                          padding: "20px 18px",
-                          textAlign: "center",
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: 52,
-                            height: 52,
-                            borderRadius: "50%",
-                            background: "var(--bg-soft)",
-                            margin: "0 auto 12px",
-                            display: "grid",
-                            placeItems: "center",
-                            fontWeight: 600,
-                            color: "var(--ink-faint)",
-                          }}
-                        >
-                          {t.name
-                            .split(" ")
-                            .map((w) => w[0])
-                            .join("")}
-                        </div>
-                        <b style={{ fontSize: 14.5, display: "block" }}>{t.name}</b>
-                        <span style={{ fontSize: 12.5, color: "var(--ink-faint)", display: "block", marginBottom: 8 }}>
-                          {t.role}
-                        </span>
-                        <span style={{ fontSize: 11.5, color: "var(--ink-soft)", lineHeight: 1.5, display: "block" }}>
-                          {t.notes}
-                        </span>
-                      </div>
+                  <p className="team-hint">{t("d_team_hint")}</p>
+                  <div className="team-grid">
+                    {s.team.map((m) => (
+                      <TeamMember key={m.name} m={m} />
                     ))}
                   </div>
                 </Section>

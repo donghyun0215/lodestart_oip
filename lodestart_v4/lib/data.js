@@ -2285,3 +2285,53 @@ ORGS.forEach((o) => {
     if (o.calls[i]) Object.assign(o.calls[i], c);
   });
 });
+
+/* Team member roles & bios — grafted by array index per company */
+const KO_TEAM = {
+  deepsearch: [
+    { notes_ko: "국민연금(NPS) AI 자문 · 前 파트너스VC 심사역 · 前 딜로이트 · 前 네이버 리드 개발자" },
+    { notes_ko: "한국공인회계사(KICPA) · 前 핀다·버즈빌 CFO · 前 쿠팡 · 前 딜로이트" },
+    { notes_ko: "前 굿닥 CTO · 前 직방 리드 개발자 · UJET 창립 멤버" },
+  ],
+  eastseabrother: [
+    { role_ko: "창업자 & CEO", notes_ko: "기획·디자인·총괄 운영 · 성균관대 건축학" },
+    { notes_ko: "법인 영업 출신 · 국내외 영업 및 무역 거래처 담당" },
+    { role_ko: "고객경험 총괄", notes_ko: "최장기 근속 구성원 · 생산/품질 및 VIP 고객 관리" },
+    { role_ko: "운영", notes_ko: "운영기획 5년 · 회계 전공" },
+  ],
+  willog: [{ role_ko: "대외협력 총괄", notes_ko: "본 자료 기준 대표 참여 인력 · 전체 리더십은 비공개" }],
+  "cutshion-pionoid": [
+    { role_ko: "창업자 & CEO", notes_ko: "서울대 컴퓨터공학 석사 · 前 퓨처로봇 부사장 · IT/로보틱스 25년" },
+    { notes_ko: "한양대 기계설계 · 前 LG전자 수석연구원 · 로보틱스 32년(로봇청소기 포함)" },
+    { notes_ko: "서울대 석사 · 서울과학기술대 박사 · 비즈데이터 공동대표 · AI 사업 10년" },
+    { notes_ko: "한양대 법학 · 前 퓨처로봇·로보케어 마케팅 디렉터 · 로봇 마케팅 20년" },
+    { notes_ko: "조선대 건축학 박사과정 · 건축사 · IT 벤처 경영 10년" },
+    { notes_ko: "서울대 의류학 박사 · 前 GS샵 팀장 · 마케팅 30년" },
+    { notes_ko: "홍익대 산업디자인 · 前 LG전자 디자인연구소 팀장" },
+    { notes_ko: "중앙대 법학 · 前 하나캐피탈 팀장 · F&B/헬스케어 25년" },
+  ],
+  haesong: [
+    { role_ko: "창업자 & CEO", notes_ko: "오사카산업대 생산시스템(대학원) · 전남대 MBA · 김 산업 17년+ · 前 현대자동차" },
+    { role_ko: "경영전략", notes_ko: "세종대 AI(대학원) · 홍익대 빅데이터 · 한국건강증진개발원 연구원" },
+    { role_ko: "유통·영업", notes_ko: "조선대 중어중문학 · 김 산업 3년+ · 일본 영업·커뮤니케이션" },
+  ],
+  xylolabs: [
+    { role_ko: "창업자 & CEO", notes_ko: "서울대 공학박사(음향) · 前 페리지에어로스페이스 연구센터장 · 설비 상태분석/신호처리 12년" },
+    { notes_ko: "서울대 전기정보공학 · 데이터 파이프라인 및 운영 인프라" },
+    { notes_ko: "서울대 경제학 · 前 페리지에어로스페이스·프렌트립 CFO · KRX 기술상장 심사위원" },
+  ],
+  "double-t": [
+    {
+      role_ko: "창업자 & CEO",
+      notes_ko: "경희대 컴퓨터공학 학사 · 경희대 데이터사이언스 석사과정 · 前 LG전자(2015–2020, 2019 LG전자 혁신상) · LG 그램 PC 기획·개발 총괄",
+    },
+  ],
+};
+
+STARTUPS.forEach((s) => {
+  const rows = KO_TEAM[s.slug];
+  if (!rows) return;
+  rows.forEach((r, i) => {
+    if (s.team[i]) Object.assign(s.team[i], r);
+  });
+});
