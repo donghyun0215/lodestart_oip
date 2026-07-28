@@ -11,7 +11,10 @@ export default function StartupRow({ s }) {
       <div className="s-body">
         <div className="s-head">
           <div>
-            <span className="chip-program">{s.programme}</span>
+            <span className="chip-program">
+              {s.programme}
+              {s.edition ? ` ${s.edition}` : ""}
+            </span>
             <h3 style={{ marginTop: 8 }}>{s.name}</h3>
           </div>
         </div>

@@ -6,6 +6,7 @@ import StartupRow from "@/components/StartupRow";
 import OrgRow from "@/components/OrgRow";
 import Marquee from "@/components/Marquee";
 import Reveal from "@/components/Reveal";
+import SwimmyWater from "@/components/SwimmyWater";
 import { useLang } from "@/components/LanguageProvider";
 
 const PILLAR_LINK = { 1: "/startups", 2: "/open-innovation", 3: "/events", 4: "/newsletter", 5: "/outreach" };
@@ -84,16 +85,7 @@ export default function Home() {
             <p className="sub" style={{ marginTop: 16 }}>{t("sw_body2")}</p>
           </Reveal>
           <Reveal delay={80}>
-            {/* Two nested loops at co-prime periods (9.7s drift / 6.3s sway) so the
-                combined motion only repeats every ~61s — it never reads as a GIF loop.
-                Killed automatically by the global prefers-reduced-motion rule. */}
-            <div className="swimmy-art">
-              <img
-                className="swimmy-fish"
-                src="/covers/swimmy-bigfish.jpg"
-                alt="Many small fish swimming together in the shape of one big fish"
-              />
-            </div>
+            <SwimmyWater />
           </Reveal>
         </div>
       </section>

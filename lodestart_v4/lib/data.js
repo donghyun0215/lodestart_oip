@@ -9,6 +9,7 @@ export const STARTUPS = [
     slug: "deepsearch",
     name: "DeepSearch",
     programme: "FINNECT",
+    edition: "2025",
     sector: "FinTech",
     hq: "Seoul, South Korea",
     banner: {
@@ -95,6 +96,7 @@ export const STARTUPS = [
     slug: "forest-jalan",
     name: "Forest Jalan",
     programme: "FINNECT",
+    edition: "2025",
     sector: "RWA / Private Credit",
     hq: "Seoul, South Korea · Jakarta, Indonesia",
     banner: {
@@ -170,6 +172,7 @@ export const STARTUPS = [
     slug: "wavebridge",
     name: "Wavebridge Inc.",
     programme: "FINNECT",
+    edition: "2025",
     sector: "Digital Assets",
     hq: "Seoul, South Korea · Lithuania (EU)",
     banner: {
@@ -243,6 +246,7 @@ export const STARTUPS = [
     slug: "stockeeper",
     name: "STOCKEEPER Co. Ltd",
     programme: "FINNECT",
+    edition: "2025",
     sector: "STO / AgriFinance",
     hq: "Seoul, South Korea",
     banner: {
@@ -321,7 +325,7 @@ export const STARTUPS = [
   {
     slug: "eastseabrother",
     name: "Eastseabrother Co., Ltd.",
-    programme: "EMA-MARINE",
+    programme: "KIMST",
     sector: "Pet Food / Blue Food",
     hq: "Goseong, Gangwon-do, South Korea",
     banner: {
@@ -423,7 +427,7 @@ export const STARTUPS = [
   {
     slug: "willog",
     name: "Willog Inc.",
-    programme: "EMA-MARINE",
+    programme: "KIMST",
     sector: "Marine Logistics / AIoT",
     hq: "Seoul, South Korea (Singapore entity established for SEA expansion)",
     banner: {
@@ -523,7 +527,7 @@ export const STARTUPS = [
   {
     slug: "cutshion-pionoid",
     name: "CUTSHION Inc. (Pionoid)",
-    programme: "EMA-MARINE",
+    programme: "KIMST",
     sector: "Robotics Middleware",
     hq: "Seoul, South Korea (U.S. entity established in Fairfax County, VA)",
     banner: {
@@ -617,7 +621,7 @@ export const STARTUPS = [
   {
     slug: "haesong",
     name: "Haesong S&T Co., Ltd.",
-    programme: "EMA-MARINE",
+    programme: "KIMST",
     sector: "Alternative Seaweed / Food Ingredients",
     hq: "Gwangju, South Korea",
     banner: {
@@ -716,7 +720,7 @@ export const STARTUPS = [
   {
     slug: "xylolabs",
     name: "Xylolabs Inc.",
-    programme: "EMA-MARINE",
+    programme: "KIMST",
     sector: "Predictive Maintenance / Physical AI",
     hq: "Seoul, South Korea",
     banner: {
@@ -806,7 +810,7 @@ export const STARTUPS = [
   {
     slug: "double-t",
     name: "Double T Inc.",
-    programme: "EMA-MARINE",
+    programme: "KIMST",
     sector: "Industrial Safety / Digital Twin",
     hq: "Suwon, South Korea",
     banner: {
@@ -917,6 +921,112 @@ export const SECTORS = [
 ];
 
 // ------------------------------------------------------------------
+// PROGRAMMES — the events / accelerator cohorts that companies came
+// through. This is the PRIMARY grouping on the Startups page: each
+// programme renders a card, clicking it filters the roster below.
+//
+// Adding a company later = add its slug to the right `companies` array
+// (and add the company object to STARTUPS). Nothing else changes —
+// the card grid, the filter chips and the counts all derive from here,
+// so the page scales from 10 companies to 30+ without layout work.
+//
+// Adding a brand-new event = append an object below. `logo` + `bg`
+// drive the card cover; drop the artwork in /public/logos/programmes/.
+// `companies: []` is fine — the card renders in a "roster coming"
+// state so it can go live before the list is confirmed.
+// ------------------------------------------------------------------
+export const PROGRAMMES = [
+  {
+    slug: "finnect",
+    name: "FINNECT",
+    name_ko: "FINNECT",
+    tagline: "Korea–Singapore fintech bridge",
+    tagline_ko: "한국–싱가포르 핀테크 브리지",
+    host: "Fintech Center Korea (FCK)",
+    host_ko: "핀테크지원센터 (FCK)",
+    years: "2025 · 2026",
+    place: "Singapore",
+    place_ko: "싱가포르",
+    logo: "/logos/programmes/finnect.png",
+    bg: "#0a0a0a",
+    logoScale: 0.62,
+    desc:
+      "The flagship Korea–Singapore fintech programme, run with Fintech Center Korea. The 2025 and 2026 cohorts are listed together — payments, digital assets, tokenized real-world assets and financial AI.",
+    desc_ko:
+      "핀테크지원센터(FCK)와 함께 운영하는 한국–싱가포르 핀테크 대표 프로그램입니다. 2025년과 2026년 기수를 함께 모아 보여줍니다 — 결제, 디지털 자산, 실물자산 토큰화, 금융 AI.",
+    companies: ["deepsearch", "forest-jalan", "wavebridge", "stockeeper"],
+  },
+  {
+    slug: "kimst",
+    name: "KIMST Marine Global",
+    name_ko: "KIMST 해양수산 글로벌",
+    tagline: "Blue economy accelerator",
+    tagline_ko: "블루 이코노미 액셀러레이터",
+    host: "Korea Institute of Marine Science & Technology Promotion",
+    host_ko: "해양수산과학기술진흥원 (KIMST)",
+    years: "2026",
+    place: "Singapore",
+    place_ko: "싱가포르",
+    logo: "/logos/programmes/kimst.png",
+    bg: "#ffffff",
+    logoScale: 0.46,
+    desc:
+      "Korea's national marine science and technology agency cohort — blue food, marine logistics, port robotics and predictive maintenance companies taken to Singapore for proof of concept.",
+    desc_ko:
+      "해양수산과학기술진흥원(KIMST) 기수입니다. 블루푸드, 해양 물류, 항만 로보틱스, 예지보전 기업들이 싱가포르에서 PoC를 진행합니다.",
+    companies: ["eastseabrother", "willog", "cutshion-pionoid", "haesong", "xylolabs", "double-t"],
+  },
+  {
+    slug: "cmk",
+    name: "Hyundai Motor Chung Mong-Koo Foundation",
+    name_ko: "현대차 정몽구 재단",
+    tagline: "Social impact & mobility ventures",
+    tagline_ko: "사회혁신 · 모빌리티 벤처",
+    host: "Chung Mong-Koo Foundation",
+    host_ko: "현대차 정몽구 재단",
+    years: "2026",
+    place: "Singapore",
+    place_ko: "싱가포르",
+    logo: "/logos/programmes/cmk.png",
+    bg: "#014282",
+    logoScale: 0.72,
+    desc:
+      "Corporate foundation cohort backing Korean ventures with social and mobility impact, brought into the Singapore and Southeast Asian market.",
+    desc_ko:
+      "사회적 임팩트와 모빌리티 분야의 한국 벤처를 지원하는 기업재단 기수로, 싱가포르 및 동남아 시장 진출을 함께합니다.",
+    companies: [],
+  },
+  {
+    slug: "kised-climate",
+    name: "KISED Climate Tech",
+    name_ko: "창업진흥원 기후테크",
+    tagline: "Climate & sustainability cohort",
+    tagline_ko: "기후 · 지속가능성 기수",
+    host: "Korea Institute of Startup & Entrepreneurship Development",
+    host_ko: "창업진흥원 (KISED)",
+    years: "2026",
+    place: "Singapore",
+    place_ko: "싱가포르",
+    logo: "/logos/programmes/kised.png",
+    bg: "#ffffff",
+    logoScale: 0.68,
+    desc:
+      "Climate technology cohort under Korea's national startup agency — decarbonisation, clean energy and sustainability companies matched to Singapore demand.",
+    desc_ko:
+      "창업진흥원 기후테크 기수입니다. 탈탄소, 청정에너지, 지속가능성 기업을 싱가포르 수요처와 연결합니다.",
+    companies: [],
+  },
+];
+
+/* slug -> programme, so a company row can label itself without a lookup loop. */
+export const PROGRAMME_BY_COMPANY = PROGRAMMES.reduce((acc, prog) => {
+  prog.companies.forEach((c) => {
+    acc[c] = prog;
+  });
+  return acc;
+}, {});
+
+// ------------------------------------------------------------------
 // Theme groupings for the Startups page card grid.
 // Each theme lists the `slug`s of STARTUPS that belong to it, so
 // adding a company later is just adding its slug to a theme's list
@@ -934,7 +1044,6 @@ export const STARTUP_THEMES = [
     desc: "Applying machine intelligence to markets, research and financial decision-making.",
     desc_ko: "시장, 리서치, 금융 의사결정에 AI를 적용하는 기업들.",
     cover: "ai",
-    image: "/covers/themes/ai-financial-data.jpg",
     companies: ["deepsearch"],
   },
   {
@@ -944,7 +1053,6 @@ export const STARTUP_THEMES = [
     desc: "Bringing traditional and alternative assets on-chain, from custody to security tokens.",
     desc_ko: "커스터디부터 증권형 토큰까지, 전통·대체 자산을 온체인으로 옮기는 기업들.",
     cover: "tokenization",
-    image: "/covers/themes/digital-assets.jpg",
     companies: ["wavebridge", "stockeeper"],
   },
   {
@@ -954,7 +1062,6 @@ export const STARTUP_THEMES = [
     desc: "Structuring private credit and real-world assets for new pools of investors.",
     desc_ko: "사모신용과 실물자산을 새로운 투자자 풀에 맞게 구조화하는 기업들.",
     cover: "rwa",
-    image: "/covers/themes/alt-finance-rwa.jpg",
     companies: ["forest-jalan"],
   },
   {
@@ -964,7 +1071,6 @@ export const STARTUP_THEMES = [
     desc: "Seafood, marine logistics, and ocean-linked ventures turning Korea's coastal industries into export-ready brands and platforms.",
     desc_ko: "수산물, 해양 물류 등 한국의 연안 산업을 수출 브랜드와 플랫폼으로 전환하는 기업들.",
     cover: "ocean",
-    image: "/covers/themes/blue-economy.jpg",
     companies: ["eastseabrother", "willog", "haesong"],
   },
   {
@@ -974,7 +1080,6 @@ export const STARTUP_THEMES = [
     desc: "Middleware and hardware replacing scarce industrial labor with deployable robot applications.",
     desc_ko: "부족한 산업 인력을 대체하는 로봇 애플리케이션과 미들웨어를 만드는 기업들.",
     cover: "robotics",
-    image: "/covers/themes/robotics-automation.jpg",
     companies: ["cutshion-pionoid"],
   },
   {
@@ -984,7 +1089,6 @@ export const STARTUP_THEMES = [
     desc: "Sensor-driven Physical AI reading the real-time condition of critical equipment and worksites to predict failures and prevent accidents before they happen.",
     desc_ko: "실시간 센서 데이터로 설비와 현장의 상태를 읽어 고장과 사고를 사전에 예측·예방하는 피지컬 AI 기업들.",
     cover: "safety",
-    image: "/covers/themes/physical-ai-safety.jpg",
     companies: ["xylolabs", "double-t"],
   },
 ];

@@ -1,27 +1,65 @@
 "use client";
 import { useState, useMemo, useRef } from "react";
-import { STARTUPS, STARTUP_THEMES } from "@/lib/data";
+import { STARTUPS, STARTUP_THEMES, PROGRAMMES } from "@/lib/data";
 import StartupRow from "@/components/StartupRow";
-import ThemeCard from "@/components/ThemeCard";
+import ProgrammeCard from "@/components/ProgrammeCard";
 import Reveal from "@/components/Reveal";
+import { RuleTitle } from "@/components/Bits";
 import { useLang } from "@/components/LanguageProvider";
+
+/* Companies belonging to a programme, resolved once. */
+const COMPANIES_OF = PROGRAMMES.reduce((acc, p) => {
+  acc[p.slug] = p.companies;
+  return acc;
+}, {});
 
 export default function StartupsPage() {
   const { t, p } = useLang();
-  const [theme, setTheme] = useState(null); // selected theme slug, or null = all
+
+  const [progs, setProgs] = useState([]);   // selected programme slugs
+  const [themes, setThemes] = useState([]); // selected theme slugs
+  const [q, setQ] = useState("");
   const listRef = useRef(null);
 
-  const activeTheme = STARTUP_THEMES.find((th) => th.slug === theme) ?? null;
+  const toggle = (list, setList, v) =>
+    setList(list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
+
+  const reset = () => {
+    setProgs([]);
+    setThemes([]);
+    setQ("");
+  };
+
+  const countForProg = (prog) =>
+    STARTUPS.filter((s) => prog.companies.includes(s.slug)).length;
+  const countForTheme = (th) =>
+    STARTUPS.filter((s) => th.companies.includes(s.slug)).length;
 
   const list = useMemo(() => {
-    if (!activeTheme) return STARTUPS;
-    return STARTUPS.filter((s) => activeTheme.companies.includes(s.slug));
-  }, [activeTheme]);
+    const term = q.trim().toLowerCase();
+    const progSlugs = progs.flatMap((sl) => COMPANIES_OF[sl] ?? []);
+    const themeSlugs = themes.flatMap(
+      (sl) => STARTUP_THEMES.find((th) => th.slug === sl)?.companies ?? []
+    );
 
-  const countFor = (th) => STARTUPS.filter((s) => th.companies.includes(s.slug)).length;
+    return STARTUPS.filter((s) => {
+      const progOk = progs.length === 0 || progSlugs.includes(s.slug);
+      const themeOk = themes.length === 0 || themeSlugs.includes(s.slug);
+      const qOk =
+        !term ||
+        s.name.toLowerCase().includes(term) ||
+        s.sector.toLowerCase().includes(term) ||
+        (s.summary ?? "").toLowerCase().includes(term) ||
+        (s.summary_ko ?? "").toLowerCase().includes(term) ||
+        (s.hashtags ?? []).some((h) => h.toLowerCase().includes(term));
+      return progOk && themeOk && qOk;
+    });
+  }, [progs, themes, q]);
 
-  const selectTheme = (slug) => {
-    setTheme((cur) => (cur === slug ? null : slug));
+  const activeCount = progs.length + themes.length + (q ? 1 : 0);
+
+  const selectProg = (slug) => {
+    toggle(progs, setProgs, slug);
     requestAnimationFrame(() => {
       listRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -37,26 +75,24 @@ export default function StartupsPage() {
         </div>
       </header>
 
-      {/* ---------- THEME GRID ---------- */}
+      {/* ---------- PROGRAMME (EVENT) GRID ---------- */}
       <section className="section soft">
         <div className="wrap">
           <Reveal>
-            <span className="kicker">{t("theme_kicker")}</span>
-            <h2 className="h-section" style={{ margin: "14px 0 12px" }}>
-              {t("theme_title")}
-            </h2>
-            <p className="sub" style={{ marginBottom: 40 }}>
-              {t("theme_sub")}
-            </p>
+            <RuleTitle
+              kicker={t("prog_kicker")}
+              title={t("prog_title")}
+              sub={t("prog_sub")}
+            />
           </Reveal>
-          <div className="theme-grid">
-            {STARTUP_THEMES.map((th, i) => (
-              <Reveal key={th.slug} delay={i * 60}>
-                <ThemeCard
-                  theme={th}
-                  count={countFor(th)}
-                  active={theme === th.slug}
-                  onSelect={() => selectTheme(th.slug)}
+          <div className="prog-grid">
+            {PROGRAMMES.map((prog, i) => (
+              <Reveal key={prog.slug} delay={i * 60}>
+                <ProgrammeCard
+                  prog={prog}
+                  count={countForProg(prog)}
+                  active={progs.includes(prog.slug)}
+                  onSelect={() => selectProg(prog.slug)}
                 />
               </Reveal>
             ))}
@@ -64,19 +100,83 @@ export default function StartupsPage() {
         </div>
       </section>
 
-      {/* ---------- COMPANY LIST ---------- */}
+      {/* ---------- FILTER PANEL + COMPANY LIST ---------- */}
       <section className="section" ref={listRef}>
         <div className="wrap">
-          <p className="result-note">
+          <div className="filter-panel">
+            <div className="fp-row">
+              <label className="fp-label" htmlFor="co-search">
+                {t("f_search")}
+              </label>
+              <input
+                id="co-search"
+                type="search"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder={t("f_co_search_ph")}
+                className="fp-input"
+              />
+              <button className="btn btn-black btn-sm fp-reset" onClick={reset} type="button">
+                {t("f_reset")}
+              </button>
+            </div>
+
+            <div className="fp-row">
+              <span className="fp-label">{t("f_programme")}</span>
+              <div className="fp-chips">
+                {PROGRAMMES.map((prog) => (
+                  <button
+                    key={prog.slug}
+                    type="button"
+                    className={`fp-chip ${progs.includes(prog.slug) ? "on" : ""}`}
+                    onClick={() => toggle(progs, setProgs, prog.slug)}
+                    aria-pressed={progs.includes(prog.slug)}
+                  >
+                    {p(prog, "name")}
+                    {progs.includes(prog.slug) && <i aria-hidden="true">×</i>}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="fp-row">
+              <span className="fp-label">{t("f_theme")}</span>
+              <div className="fp-chips">
+                {STARTUP_THEMES.map((th) => (
+                  <button
+                    key={th.slug}
+                    type="button"
+                    className={`fp-chip ${themes.includes(th.slug) ? "on" : ""}`}
+                    onClick={() => toggle(themes, setThemes, th.slug)}
+                    aria-pressed={themes.includes(th.slug)}
+                    title={p(th, "desc")}
+                  >
+                    {p(th, "title")}
+                    <em className="fp-n" aria-hidden="true">
+                      {countForTheme(th)}
+                    </em>
+                    {themes.includes(th.slug) && <i aria-hidden="true">×</i>}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <p className="result-note" style={{ marginTop: 24 }}>
             <b style={{ color: "var(--ink)" }}>{list.length}</b>{" "}
             {list.length === 1 ? t("co_count_one") : t("co_count_many")}
-            {activeTheme ? ` ${t("co_in")} ${p(activeTheme, "title")}` : ""}
-            {activeTheme && (
-              <button type="button" className="theme-reset" onClick={() => setTheme(null)}>
+            {activeCount > 0
+              ? ` · ${activeCount} ${
+                  activeCount === 1 ? t("oi_filter_applied") : t("oi_filters_applied")
+                }`
+              : ""}
+            {activeCount > 0 && (
+              <button type="button" className="theme-reset" onClick={reset}>
                 {t("theme_clear")}
               </button>
             )}
           </p>
+
           <div className="s-list">
             {list.map((s, i) => (
               <Reveal key={s.slug} delay={i * 50}>
@@ -84,9 +184,12 @@ export default function StartupsPage() {
               </Reveal>
             ))}
           </div>
+
+          {list.length === 0 && (
+            <p className="empty-note">{t("co_none")}</p>
+          )}
         </div>
       </section>
     </>
   );
 }
-

@@ -7,9 +7,9 @@
 export const STRINGS = {
   en: {
     sw_body2: "Backed by the Embassy of the Republic of Korea, KOCHAM, and leading national agencies (KSC, NIPA, KOCCA, KTO), we bring Korea's boldest innovators to the global stage through structured PoCs, pilot deployments, AI-driven outreach, and high-impact demo days.",
-    nav_events: "Events",
+    nav_events: "K-Startups Events",
     nav_newsletter: "Newsletter",
-    nav_outreach: "Outreach",
+    nav_outreach: "Outreach Service",
     ev_kicker: "K-Startups Community",
     ev_title_a: "Amplify the power of",
     ev_title_b: "collective voices",
@@ -179,10 +179,20 @@ export const STRINGS = {
     co_view: "View profile",
     co_back: "All companies",
 
+    co_none: "No companies match these filters yet. Clear a filter, or talk to us about what you're looking for.",
+
+    prog_kicker: "By Programme",
+    prog_title: "Every company here came through one of our programmes",
+    prog_sub:
+      "Each card is an event we ran or co-ran with a Korean national agency, foundation or centre. Select one to see the companies that took part — or use the filters below to cut the full roster by theme.",
+    prog_view: "View companies",
+    prog_soon: "Roster in preparation",
+    prog_pending: "Roster coming",
+
     theme_kicker: "By Theme",
-    theme_title: "Browse the KIMST roster by focus area",
+    theme_title: "Browse the roster by focus area",
     theme_sub:
-      "Companies from K-Innovation Partners's KIMST accelerator cohort, grouped by what they actually build. More themes join as new cohorts come through.",
+      "Companies from our programme cohorts, grouped by what they actually build. More themes join as new cohorts come through.",
     theme_view: "View companies",
     theme_company_one: "company",
     theme_company_many: "companies",
@@ -212,6 +222,9 @@ export const STRINGS = {
       "Live innovation calls from Singapore's agencies, regulators, and corporates — plus institutional needs K-Innovation Partners sources directly. Study the counterpart before you approach; we make the introduction.",
     f_search: "Search",
     f_search_ph: "Keyword, owner, or technology — e.g. digital assets, computer vision",
+    f_co_search_ph: "Company, sector, or technology — e.g. tokenization, predictive maintenance",
+    f_programme: "Programme",
+    f_theme: "Theme",
     f_sector: "Sector",
     f_source: "Source",
     f_status: "Status",
@@ -356,9 +369,9 @@ export const STRINGS = {
 
   ko: {
     sw_body2: "주싱가포르 대한민국 대사관, KOCHAM, 그리고 KSC·NIPA·KOCCA·KTO 등 주요 국가기관의 지원을 바탕으로, 체계적인 PoC와 파일럿 실증, AI 기반 아웃리치, 임팩트 있는 데모데이를 통해 한국의 가장 대담한 혁신 기업을 글로벌 무대로 이끕니다.",
-    nav_events: "이벤트",
+    nav_events: "K-스타트업 이벤트",
     nav_newsletter: "뉴스레터",
-    nav_outreach: "아웃리치",
+    nav_outreach: "아웃리치 서비스",
     ev_kicker: "K-스타트업 커뮤니티",
     ev_title_a: "함께일 때 커지는",
     ev_title_b: "목소리의 힘",
@@ -516,10 +529,20 @@ export const STRINGS = {
     co_view: "프로필 보기",
     co_back: "전체 기업",
 
+    co_none: "조건에 맞는 기업이 아직 없습니다. 필터를 해제하거나, 찾으시는 기업을 저희에게 알려주세요.",
+
+    prog_kicker: "프로그램별 보기",
+    prog_title: "모든 기업은 저희 프로그램을 거쳐 왔습니다",
+    prog_sub:
+      "각 카드는 국내 기관·재단·센터와 함께 운영한 프로그램입니다. 카드를 선택하면 해당 참여 기업이 아래에 표시되고, 필터로 전체 명단을 테마별로 좁혀 볼 수도 있습니다.",
+    prog_view: "참여 기업 보기",
+    prog_soon: "명단 준비 중",
+    prog_pending: "명단 준비 중",
+
     theme_kicker: "테마별 보기",
-    theme_title: "KIMST 기업들을 관심 분야별로 살펴보세요",
+    theme_title: "관심 분야별로 살펴보세요",
     theme_sub:
-      "K-Innovation Partners의 KIMST 액셀러레이터 기수를 거친 기업들을 실제로 만드는 것 기준으로 묶었습니다. 새 기수가 들어올 때마다 테마도 늘어납니다.",
+      "프로그램 기수를 거친 기업들을 실제로 만드는 것 기준으로 묶었습니다. 새 기수가 들어올 때마다 테마도 늘어납니다.",
     theme_view: "기업 보기",
     theme_company_one: "개 기업",
     theme_company_many: "개 기업",
@@ -547,6 +570,9 @@ export const STRINGS = {
       "싱가포르 정부기관, 규제기관, 대기업의 현재 진행 중인 공고와 K-Innovation Partners가 직접 발굴한 기관 니즈를 함께 제공합니다. 접근 전에 상대를 파악하시면, 소개는 저희가 합니다.",
     f_search: "검색",
     f_search_ph: "키워드, 발주기관, 기술 — 예: 디지털 자산, 컴퓨터 비전",
+    f_co_search_ph: "기업명, 분야, 기술 — 예: 토큰화, 예지보전",
+    f_programme: "프로그램",
+    f_theme: "테마",
     f_sector: "분야",
     f_source: "출처",
     f_status: "상태",
