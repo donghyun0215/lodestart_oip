@@ -224,23 +224,23 @@ export default function ChallengeCard({ c }) {
       <div className="c-card-body">
         <div className="c-card-top">
           <span className="c-sector">{p(c, "sector")}</span>
-          <span className="c-fn">{c.fn}</span>
+          <span className="c-fn">{p(c, "fn")}</span>
         </div>
 
         <h3>{p(c, "title")}</h3>
 
         <div className="c-tags">
-          {c.tags.slice(0, 2).map((t) => (
-            <span key={t} className="c-tag">
-              {t}
+          {p(c, "tags").slice(0, 2).map((tag) => (
+            <span key={tag} className="c-tag">
+              {tag}
             </span>
           ))}
-          {c.tags.length > 2 && <span className="c-tag more">more…</span>}
+          {c.tags.length > 2 && <span className="c-tag more">{t("oi_more")}</span>}
         </div>
 
         <p className="c-desc">{p(c, "desc")}</p>
 
-        <div className="c-prize">{c.prize}</div>
+        <div className="c-prize">{p(c, "prize")}</div>
 
         <div className="c-owner">
           {/* Drop a file into /public/logos and set `ownerLogo` in lib/data.js to swap the initials chip */}
@@ -258,7 +258,7 @@ export default function ChallengeCard({ c }) {
           ) : (
             <span className="c-owner-mark">{c.ownerMark}</span>
           )}
-          <span className="c-owner-name">{c.owner}</span>
+          <span className="c-owner-name">{p(c, "owner")}</span>
         </div>
       </div>
 

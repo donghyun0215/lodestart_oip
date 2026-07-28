@@ -6,7 +6,7 @@ import StartupRow from "@/components/StartupRow";
 import OrgRow from "@/components/OrgRow";
 import Marquee from "@/components/Marquee";
 import Reveal from "@/components/Reveal";
-import SwimmyWater from "@/components/SwimmyWater";
+import SwimmySection from "@/components/SwimmySection";
 import { useLang } from "@/components/LanguageProvider";
 
 const PILLAR_LINK = { 1: "/startups", 2: "/open-innovation", 3: "/events", 4: "/newsletter", 5: "/outreach" };
@@ -71,24 +71,8 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ---------- SWIMMY INTRO ---------- */}
-      <section className="section">
-        <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 48, alignItems: "center" }}>
-          <Reveal>
-            <span className="kicker">{t("sw_kicker")}</span>
-            <h2 className="h-section" style={{ margin: "14px 0 18px", lineHeight: 1.15 }}>
-              {t("sw_line_a")}
-              <br />
-              <em style={{ color: "var(--orange)", fontStyle: "normal" }}>{t("sw_line_b")}</em>
-            </h2>
-            <p className="sub">{t("sw_body")}</p>
-            <p className="sub" style={{ marginTop: 16 }}>{t("sw_body2")}</p>
-          </Reveal>
-          <Reveal delay={80}>
-            <SwimmyWater />
-          </Reveal>
-        </div>
-      </section>
+      {/* ---------- SWIMMY INTRO — full-bleed ocean ---------- */}
+      <SwimmySection />
 
       {/* ---------- FIVE PILLARS ---------- */}
       <section className="section">

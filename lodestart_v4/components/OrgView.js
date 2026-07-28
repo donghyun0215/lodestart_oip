@@ -6,7 +6,7 @@ import { ORGS, STARTUPS } from "@/lib/data";
 import { useLang } from "@/components/LanguageProvider";
 
 export default function OrgView({ slug }) {
-  const { t, p } = useLang();
+  const { t, p, lang } = useLang();
   const o = ORGS.find((x) => x.slug === slug);
   if (!o) notFound();
 
@@ -45,13 +45,13 @@ export default function OrgView({ slug }) {
           <h1 className="h-section">{p(o, "name")}</h1>
           <p className="sub">{p(o, "desc")}</p>
           <div className="org-focus" style={{ marginTop: 20 }}>
-            {o.focus.map((f) => (
+            {o.focus.map((f, fi) => (
               <span
                 key={f}
                 className="hash"
                 style={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.8)" }}
               >
-                {f}
+                {lang === "ko" && o.focus_ko ? o.focus_ko[fi] ?? f : f}
               </span>
             ))}
           </div>
@@ -75,8 +75,8 @@ export default function OrgView({ slug }) {
                 <div>
                   <h5>{p(c, "title")}</h5>
                   <div className="call-meta">
-                    <span>{c.sector}</span>
-                    <span>{c.funding}</span>
+                    <span>{p(c, "sector")}</span>
+                    <span>{p(c, "funding")}</span>
                     <span>{t("oi_end_date")} {c.deadline}</span>
                   </div>
                 </div>

@@ -14,6 +14,8 @@ function Section({ title, children }) {
   );
 }
 
+const HOST_TYPE_KO = { Host: "호스트", "Co-host": "공동 호스트" };
+
 function Bullets({ items }) {
   return (
     <ul>
@@ -25,7 +27,7 @@ function Bullets({ items }) {
 }
 
 export default function StartupView({ slug }) {
-  const { t, p } = useLang();
+  const { t, p, lang } = useLang();
   const s = STARTUPS.find((x) => x.slug === slug);
   if (!s) notFound();
 
@@ -103,41 +105,41 @@ export default function StartupView({ slug }) {
               )}
 
               <Section title={t("d_problem")}>
-                <Bullets items={s.problem} />
+                <Bullets items={p(s, "problem")} />
               </Section>
 
               <Section title={t("d_opportunity")}>
-                <Bullets items={s.opportunity} />
+                <Bullets items={p(s, "opportunity")} />
               </Section>
 
               <Section title={t("d_advantage")}>
-                <Bullets items={s.advantage} />
+                <Bullets items={p(s, "advantage")} />
               </Section>
 
               <Section title={t("d_solution")}>
-                <p style={{ fontWeight: 600, color: "var(--ink)" }}>{s.solution.lead}</p>
+                <p style={{ fontWeight: 600, color: "var(--ink)" }}>{p(s.solution, "lead")}</p>
                 {s.solution.groups.map((g) => (
                   <div key={g.title}>
-                    <h4>{g.title}</h4>
-                    <Bullets items={g.items} />
+                    <h4>{p(g, "title")}</h4>
+                    <Bullets items={p(g, "items")} />
                   </div>
                 ))}
               </Section>
 
               <Section title={t("d_model")}>
-                <p style={{ fontWeight: 600, color: "var(--ink)" }}>{s.businessModel.lead}</p>
-                <Bullets items={s.businessModel.items} />
+                <p style={{ fontWeight: 600, color: "var(--ink)" }}>{p(s.businessModel, "lead")}</p>
+                <Bullets items={p(s.businessModel, "items")} />
               </Section>
 
-              {s.achievements.length > 0 && (
+              {p(s, "achievements").length > 0 && (
                 <Section title={t("d_achievements")}>
-                  <Bullets items={s.achievements} />
+                  <Bullets items={p(s, "achievements")} />
                 </Section>
               )}
 
               <Section title={t("d_highlights")}>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
-                  {s.highlights.map((h, k) => (
+                  {p(s, "highlights").map((h, k) => (
                     <div
                       key={k}
                       style={{
@@ -160,7 +162,7 @@ export default function StartupView({ slug }) {
           {/* ---------- SIDEBAR ---------- */}
           <aside className="d-side">
             <div className="side-card">
-              <span className="chip-program">{s.programme}</span>
+              <span className="chip-program">{s.programme}{s.edition ? ` ${s.edition}` : ""}</span>
               <h1 style={{ fontSize: "1.5rem", margin: "12px 0 0" }}>{s.name}</h1>
               <p className="side-quote">{p(s, "summary")}</p>
               <a href="mailto:hello@lodestart.ai" className="btn btn-black" style={{ width: "100%" }}>
@@ -213,7 +215,7 @@ export default function StartupView({ slug }) {
                   <div>
                     <b>
                       {h.name}
-                      <span>{h.type}</span>
+                      <span>{lang === "ko" ? HOST_TYPE_KO[h.type] ?? h.type : h.type}</span>
                     </b>
                     <small>{h.role}</small>
                   </div>

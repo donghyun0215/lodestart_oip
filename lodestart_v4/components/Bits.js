@@ -1,4 +1,5 @@
 "use client";
+import { useLang } from "./LanguageProvider";
 // Small shared presentational pieces
 
 export function RuleTitle({ kicker, title, sub, dark = false }) {
@@ -15,13 +16,14 @@ export function RuleTitle({ kicker, title, sub, dark = false }) {
 }
 
 export function Banner({ banner, large = false }) {
+  const { p } = useLang();
   return (
     <div className={`s-banner ${large ? "lg" : ""}`}>
       <span className="b-brand">
         <i className="b-dot" />
         {banner.brand}
       </span>
-      <span className="b-title">{banner.title}</span>
+      <span className="b-title">{p(banner, "title")}</span>
       <span className="b-tags">{banner.tags}</span>
     </div>
   );
