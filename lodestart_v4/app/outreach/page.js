@@ -36,6 +36,39 @@ export default function OutreachPage() {
           </div>
         </div>
       </section>
+
+      {/* ---------- IR deck review & expert advisory ---------- */}
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <Reveal>
+            <div className="adv-band">
+              <div className="adv-copy">
+                <span className="kicker">{t("adv_kicker")}</span>
+                <h2 className="h-section" style={{ margin: "12px 0 14px" }}>
+                  {t("adv_title_a")} <em className="accent">{t("adv_title_b")}</em>
+                </h2>
+                <p className="sub" style={{ fontSize: 15.5 }}>{t("adv_sub")}</p>
+                <a
+                  href={`mailto:hello@lodestart.ai?subject=${encodeURIComponent("[Advisory] IR Deck Review Request")}`}
+                  className="btn btn-orange"
+                  style={{ marginTop: 24 }}
+                >
+                  {t("adv_cta")} <span className="arr">→</span>
+                </a>
+                <p className="fine-note" style={{ marginTop: 14 }}>{t("adv_note")}</p>
+              </div>
+              <ul className="adv-list">
+                {[1, 2, 3].map((i) => (
+                  <li key={i}>
+                    <b>{t(`adv_i${i}_t`)}</b>
+                    <p>{t(`adv_i${i}_d`)}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }

@@ -169,6 +169,10 @@ export default function SwimmySection() {
               }}
             />
           ))}
+          {/* the show-off: leaps clear of the surface and dives back in */}
+          <span className="ocean-jumper" aria-hidden="true">
+            <Fish style={{ width: 40 }} />
+          </span>
           <span className="ocean-whale">
             <img
               src="/covers/swimmy-whale.png"
