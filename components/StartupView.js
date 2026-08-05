@@ -150,6 +150,11 @@ export default function StartupView({ slug }) {
           <aside className="d-side">
             <div className="side-card">
               <span className="chip-program">{s.programme}{s.edition ? ` ${s.edition}` : ""}</span>
+              {s.logo && (
+                <span className="side-brand-logo">
+                  <img src={s.logo} alt={`${s.name} logo`} />
+                </span>
+              )}
               <h1 style={{ fontSize: "1.5rem", margin: "12px 0 0" }}>{s.name}</h1>
               <p className="side-quote">{p(s, "summary")}</p>
               <a href="mailto:hello@lodestart.ai" className="btn btn-black" style={{ width: "100%" }}>

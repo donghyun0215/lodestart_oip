@@ -951,8 +951,23 @@ footer {
   line-height: 1.32;
   text-transform: uppercase;
   letter-spacing: 0.005em;
+  /* constant-height title zone: every card reserves 3 lines so the
+     tags / desc / facts rows below sit at the same y across the grid */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: calc(3 * 1.32em);
 }
-.c-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.c-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  /* single visible chip row; anything that would wrap is hidden whole */
+  height: 22px;
+  overflow: hidden;
+  align-content: flex-start;
+}
 .c-tag {
   font-size: 10.5px;
   color: var(--ink-soft);
@@ -966,20 +981,23 @@ footer {
   font-size: 12px;
   line-height: 1.5;
   color: var(--ink-soft);
-  flex-grow: 1;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  /* constant 2-line zone (was flex-grow, which let it drift) */
+  height: 3em;
 }
 /* one glanceable line: reward + deadline, Luma's "date row" role */
 .c-quickfacts {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
+  margin-top: auto; /* pins facts + owner to the card bottom */
   padding-top: 8px;
   border-top: 1px solid var(--line);
+  height: 32px;
 }
 .c-prize { font-size: 14px; font-weight: 600; color: var(--orange); white-space: nowrap; }
 .c-deadline { font-size: 11px; color: var(--ink-faint); white-space: nowrap; }
@@ -989,6 +1007,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 8px;
+  height: 28px; /* identical whether the org shows a logo or an initials chip */
 }
 .c-owner-mark {
   width: 26px; height: 26px;
@@ -1090,11 +1109,11 @@ footer {
 }
 .foot-social a:hover { color: #fff; border-color: #fff; background: rgba(255,255,255,0.06); }
 
-/* owner logo slot — image variant */
+/* owner logo slot — image variant (kept to the same 28px owner-row height) */
 .c-owner-img {
   display: inline-flex;
   align-items: center;
-  height: 34px;
+  height: 26px;
   flex-shrink: 0;
   padding-right: 12px;
   border-right: 1px solid var(--line);
@@ -1884,6 +1903,38 @@ html[lang="ko"] .org-desc { word-break: keep-all; }
   margin-bottom: 8px;
 }
 .flip-tile-logo { background: var(--bg-soft); border: 1px solid var(--line); font-size: 13px; color: var(--ink-faint); }
+/* real brand logo variant: white plate, logo contained; width flexes for
+   wordmarks (60Hertz, Big Mobility) while square marks stay compact */
+.flip-tile-brand {
+  width: auto;
+  min-width: 58px;
+  max-width: 84%;
+  height: 58px;
+  padding: 9px 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.flip-brand-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 40px;
+  max-width: 128px;
+  object-fit: contain;
+}
+/* company logo in the detail-page sidebar */
+.side-brand-logo {
+  display: block;
+  margin-top: 14px;
+}
+.side-brand-logo img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 46px;
+  max-width: 170px;
+  object-fit: contain;
+}
 .flip-name { font-size: 14.5px; font-weight: 600; line-height: 1.3; }
 .flip-meta { font-size: 12px; color: var(--ink-faint); }
 

@@ -95,19 +95,23 @@ export default function CompanyCard({ s }) {
       <div className="flip-inner">
         <div className="flip-front">
           <span
-            className="flip-tile"
-            style={{
-              background: `linear-gradient(140deg, hsl(${hue} 72% 94%), hsl(${hue} 60% 86%))`,
-              color: `hsl(${hue} 45% 30%)`,
-            }}
+            className={`flip-tile ${s.logo ? "flip-tile-brand" : ""}`}
+            style={
+              s.logo
+                ? undefined
+                : {
+                    background: `linear-gradient(140deg, hsl(${hue} 72% 94%), hsl(${hue} 60% 86%))`,
+                    color: `hsl(${hue} 45% 30%)`,
+                  }
+            }
           >
             {s.logo ? (
               <Image
                 src={s.logo}
                 alt=""
-                width={Math.round(((s.logoW ?? 200) / 96) * 26)}
-                height={26}
-                style={{ height: 26, width: "auto" }}
+                width={s.logoW ?? 200}
+                height={s.logoH ?? 80}
+                className="flip-brand-img"
                 unoptimized
               />
             ) : (
