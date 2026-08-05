@@ -175,8 +175,8 @@ export default function SwimmySection() {
           </span>
           <span className="ocean-whale">
             <img
-              src="/covers/swimmy-whale.png"
-              alt="Hundreds of small fish swimming together in the shape of one whale"
+              src="/covers/swimmy-dolphin.png"
+              alt="Hundreds of small fish swimming together in the shape of one dolphin"
             />
           </span>
         </div>

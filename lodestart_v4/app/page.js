@@ -1,19 +1,19 @@
 "use client";
 import Link from "next/link";
-import { STARTUPS, ORGS, FLOW, PARTNERS, TRUSTED_BY } from "@/lib/data";
+import { STARTUPS, ORGS, PARTNERS, TRUSTED_BY } from "@/lib/data";
 import { RuleTitle, NumCard } from "@/components/Bits";
-import StartupRow from "@/components/StartupRow";
-import OrgRow from "@/components/OrgRow";
+import CompanyCard from "@/components/CompanyCard";
+import OrgCard from "@/components/OrgCard";
 import Marquee from "@/components/Marquee";
 import Reveal from "@/components/Reveal";
 import SwimmySection from "@/components/SwimmySection";
 import { useLang } from "@/components/LanguageProvider";
 
-const PILLAR_LINK = { 1: "/startups", 2: "/open-innovation", 3: "/events", 4: "/newsletter", 5: "/outreach" };
+const PILLAR_LINK = { 1: "/startups", 2: "/open-innovation", 3: "/events", 4: "/insights", 5: "/outreach" };
 
 export default function Home() {
   const { t, p } = useLang();
-  const featured = STARTUPS.slice(0, 3);
+  const featured = STARTUPS.slice(0, 4);
   const orgs = ORGS.slice(0, 4);
 
   return (
@@ -74,6 +74,26 @@ export default function Home() {
       {/* ---------- SWIMMY INTRO — full-bleed ocean ---------- */}
       <SwimmySection />
 
+      {/* ---------- OPEN INNOVATION: THE REAL BOTTLENECK (moved from /open-innovation) ---------- */}
+      <section className="section soft">
+        <div className="wrap">
+          <Reveal>
+            <RuleTitle kicker={t("oi_kicker")} title={t("oi_pain_title")} sub={t("oi_sub")} />
+          </Reveal>
+          <div className="pain-grid">
+            {[1, 2, 3].map((i) => (
+              <Reveal key={i} delay={(i - 1) * 60}>
+                <div className="pain-card">
+                  <span className="pain-mark" aria-hidden="true">{`0${i}`}</span>
+                  <h3>{t(`oi_pain_${i}_t`)}</h3>
+                  <p>{t(`oi_pain_${i}_d`)}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ---------- FIVE PILLARS ---------- */}
       <section className="section">
         <div className="wrap">
@@ -108,10 +128,10 @@ export default function Home() {
           <Reveal>
             <RuleTitle kicker={t("home_co_kicker")} title={t("home_co_title")} sub={t("home_co_sub")} />
           </Reveal>
-          <div className="s-list">
+          <div className="flip-grid">
             {featured.map((s, i) => (
               <Reveal key={s.slug} delay={i * 50}>
-                <StartupRow s={s} />
+                <CompanyCard s={s} />
               </Reveal>
             ))}
           </div>
@@ -129,10 +149,10 @@ export default function Home() {
           <Reveal>
             <RuleTitle kicker={t("home_oi_kicker")} title={t("home_oi_title")} sub={t("home_oi_sub")} />
           </Reveal>
-          <div className="org-list">
+          <div className="flip-grid">
             {orgs.map((o, i) => (
               <Reveal key={o.slug} delay={i * 50}>
-                <OrgRow o={o} />
+                <OrgCard o={o} />
               </Reveal>
             ))}
           </div>
@@ -144,24 +164,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- FLOW ---------- */}
+      {/* ---------- HOW K-INNOVATION PARTNERS FITS IN (moved from /open-innovation) ---------- */}
       <section className="section dark">
         <div className="wrap">
           <Reveal>
-            <RuleTitle dark kicker={t("flow_kicker")} title={t("flow_title")} sub={t("flow_sub")} />
+            <RuleTitle dark kicker={t("oi_flow_kicker")} title={t("oi_flow_title")} sub={t("oi_flow_sub")} />
           </Reveal>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: 28 }}>
-            {FLOW.map((f, i) => (
-              <Reveal key={f.n} delay={i * 60}>
-                <span className="num-badge" style={{ background: "rgba(226,99,46,0.16)", color: "#f2a07c" }}>
-                  {f.n}
-                </span>
-                <h3 style={{ fontSize: "1.05rem", fontWeight: 500, margin: "18px 0 8px" }}>{p(f, "title")}</h3>
-                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)" }}>{p(f, "desc")}</p>
+          <div className="flow-track">
+            {[1, 2, 3, 4, 5].map((n, i) => (
+              <Reveal key={n} delay={i * 60}>
+                <div className={`flow-step ${n === 4 ? "highlight" : ""}`}>
+                  <span className="flow-n">{n}</span>
+                  <h3>{t(`oi_flow_${n}_t`)}</h3>
+                  <p>{t(`oi_flow_${n}_d`)}</p>
+                </div>
               </Reveal>
             ))}
           </div>
-          <div style={{ marginTop: 44 }}>
+          <p className="flow-note">{t("oi_flow_note")}</p>
+          <div style={{ marginTop: 36 }}>
             <Link href="/contact" className="btn btn-orange">
               {t("flow_cta")} <span className="arr">→</span>
             </Link>

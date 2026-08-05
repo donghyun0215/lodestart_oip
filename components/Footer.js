@@ -24,7 +24,7 @@ export default function Footer() {
 
           <div>
             <h4>{t("ft_services")}</h4>
-            <Link href="/newsletter">{t("ft_briefing")}</Link>
+            <Link href="/insights">{t("ft_briefing")}</Link>
             <Link href="/outreach">{t("ft_matchmaking")}</Link>
           </div>
 

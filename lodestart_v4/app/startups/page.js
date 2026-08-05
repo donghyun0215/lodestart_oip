@@ -1,8 +1,7 @@
 "use client";
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { STARTUPS, STARTUP_THEMES, PROGRAMMES } from "@/lib/data";
-import StartupRow from "@/components/StartupRow";
-import ProgrammeCard from "@/components/ProgrammeCard";
+import CompanyCard from "@/components/CompanyCard";
 import Reveal from "@/components/Reveal";
 import { RuleTitle } from "@/components/Bits";
 import { useLang } from "@/components/LanguageProvider";
@@ -19,7 +18,6 @@ export default function StartupsPage() {
   const [progs, setProgs] = useState([]);   // selected programme slugs
   const [themes, setThemes] = useState([]); // selected theme slugs
   const [q, setQ] = useState("");
-  const listRef = useRef(null);
 
   const toggle = (list, setList, v) =>
     setList(list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
@@ -30,8 +28,12 @@ export default function StartupsPage() {
     setQ("");
   };
 
-  const countForProg = (prog) =>
-    STARTUPS.filter((s) => prog.companies.includes(s.slug)).length;
+  /* /startups?programme=<slug> (e.g. from the events page) preselects a filter */
+  useEffect(() => {
+    const sl = new URLSearchParams(window.location.search).get("programme");
+    if (sl && PROGRAMMES.some((pr) => pr.slug === sl)) setProgs([sl]);
+  }, []);
+
   const countForTheme = (th) =>
     STARTUPS.filter((s) => th.companies.includes(s.slug)).length;
 
@@ -58,13 +60,6 @@ export default function StartupsPage() {
 
   const activeCount = progs.length + themes.length + (q ? 1 : 0);
 
-  const selectProg = (slug) => {
-    toggle(progs, setProgs, slug);
-    requestAnimationFrame(() => {
-      listRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  };
-
   return (
     <>
       <header className="page-hero">
@@ -75,33 +70,8 @@ export default function StartupsPage() {
         </div>
       </header>
 
-      {/* ---------- PROGRAMME (EVENT) GRID ---------- */}
-      <section className="section soft">
-        <div className="wrap">
-          <Reveal>
-            <RuleTitle
-              kicker={t("prog_kicker")}
-              title={t("prog_title")}
-              sub={t("prog_sub")}
-            />
-          </Reveal>
-          <div className="prog-grid">
-            {PROGRAMMES.map((prog, i) => (
-              <Reveal key={prog.slug} delay={i * 60}>
-                <ProgrammeCard
-                  prog={prog}
-                  count={countForProg(prog)}
-                  active={progs.includes(prog.slug)}
-                  onSelect={() => selectProg(prog.slug)}
-                />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ---------- FILTER PANEL + COMPANY LIST ---------- */}
-      <section className="section" ref={listRef}>
+      <section className="section">
         <div className="wrap">
           <div className="filter-panel">
             <div className="fp-row">
@@ -177,10 +147,10 @@ export default function StartupsPage() {
             )}
           </p>
 
-          <div className="s-list">
+          <div className="flip-grid dense">
             {list.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 50}>
-                <StartupRow s={s} />
+              <Reveal key={s.slug} delay={(i % 5) * 40}>
+                <CompanyCard s={s} />
               </Reveal>
             ))}
           </div>

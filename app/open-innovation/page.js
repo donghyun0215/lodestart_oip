@@ -8,7 +8,7 @@ import {
   ORGS,
 } from "@/lib/data";
 import ChallengeCard from "@/components/ChallengeCard";
-import OrgRow from "@/components/OrgRow";
+import OrgCard from "@/components/OrgCard";
 import Reveal from "@/components/Reveal";
 import { RuleTitle } from "@/components/Bits";
 import Link from "next/link";
@@ -71,73 +71,9 @@ export default function OpenInnovationPage() {
         <div className="wrap">
           <span className="kicker">{t("oi_kicker")}</span>
           <h1 className="h-section">{t("oi_title")}</h1>
-          <p className="sub">{t("oi_sub")}</p>
+          <p className="sub">{t("oi_sub_direct")}</p>
         </div>
       </header>
-
-      {/* ---------- PAIN POINT ---------- */}
-      <section className="section">
-        <div className="wrap">
-          <Reveal>
-            <RuleTitle kicker={t("oi_pain_kicker")} title={t("oi_pain_title")} sub={t("oi_pain_sub")} />
-          </Reveal>
-          <div className="pain-grid">
-            <Reveal>
-              <div className="pain-card">
-                <span className="pain-mark" aria-hidden="true">01</span>
-                <h3>{t("oi_pain_1_t")}</h3>
-                <p>{t("oi_pain_1_d")}</p>
-              </div>
-            </Reveal>
-            <Reveal delay={60}>
-              <div className="pain-card">
-                <span className="pain-mark" aria-hidden="true">02</span>
-                <h3>{t("oi_pain_2_t")}</h3>
-                <p>{t("oi_pain_2_d")}</p>
-              </div>
-            </Reveal>
-            <Reveal delay={120}>
-              <div className="pain-card">
-                <span className="pain-mark" aria-hidden="true">03</span>
-                <h3>{t("oi_pain_3_t")}</h3>
-                <p>{t("oi_pain_3_d")}</p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- WORKFLOW ---------- */}
-      <section className="section dark">
-        <div className="wrap">
-          <Reveal>
-            <RuleTitle dark kicker={t("oi_flow_kicker")} title={t("oi_flow_title")} sub={t("oi_flow_sub")} />
-          </Reveal>
-          <div className="flow-track">
-            {[
-              ["1", t("oi_flow_1_t"), t("oi_flow_1_d")],
-              ["2", t("oi_flow_2_t"), t("oi_flow_2_d")],
-              ["3", t("oi_flow_3_t"), t("oi_flow_3_d")],
-              ["4", t("oi_flow_4_t"), t("oi_flow_4_d")],
-              ["5", t("oi_flow_5_t"), t("oi_flow_5_d")],
-            ].map(([n, ttl, desc], i) => (
-              <Reveal key={n} delay={i * 60}>
-                <div className={`flow-step ${n === "4" ? "highlight" : ""}`}>
-                  <span className="flow-n">{n}</span>
-                  <h3>{ttl}</h3>
-                  <p>{desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <p className="flow-note">{t("oi_flow_note")}</p>
-          <div style={{ marginTop: 36 }}>
-            <Link href="/contact" className="btn btn-orange">
-              {t("oi_pain_cta")} <span className="arr">→</span>
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* ---------- FILTER BAR ---------- */}
       <section className="section soft" style={{ paddingBottom: 30 }}>
@@ -249,10 +185,10 @@ export default function OpenInnovationPage() {
               sub={t("oi_counterparts_sub")}
             />
           </Reveal>
-          <div className="org-list">
+          <div className="flip-grid">
             {ORGS.map((o, i) => (
-              <Reveal key={o.slug} delay={i * 50}>
-                <OrgRow o={o} />
+              <Reveal key={o.slug} delay={i * 40}>
+                <OrgCard o={o} />
               </Reveal>
             ))}
           </div>
