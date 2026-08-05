@@ -27,9 +27,10 @@ const EVENT_FIELDS = [
 const INSIGHT_FIELDS = [
   ["title", "Title (EN)", "Dimension X — the gateway…"],
   ["title_ko", "제목 (KO)", "딥테크 스타트업의 싱가포르 진출 관문…"],
+  ["source", "출처 (linkedin / medium / article)", "linkedin"],
   ["tag", "Tag (EN)", "Market entry"],
   ["tag_ko", "태그 (KO)", "시장 진출"],
-  ["url", "LinkedIn URL", "https://www.linkedin.com/posts/…"],
+  ["url", "포스트/기사 URL", "https://www.linkedin.com/posts/… 또는 https://medium.com/…"],
   ["date_label", "날짜 표기", "2026.07"],
   ["sort", "정렬 순서 (숫자)", "1"],
 ];
@@ -100,7 +101,12 @@ export default function AdminPage() {
         const msg = (await res.json()).error;
         return setErr(`서버 설정 필요: ${msg} — SUPABASE_SETUP.md 참고`);
       }
-      if (!res.ok) return setErr(`오류 (${res.status})`);
+      if (!res.ok) {
+        /* 비밀번호는 통과했는데 Supabase 쪽에서 막힌 경우 — 실제 메시지를 그대로 보여준다 */
+        let detail = "";
+        try { detail = (await res.json()).error ?? ""; } catch { /* 본문 없음 */ }
+        return setErr(`오류 (${res.status})${detail ? ` — ${detail}` : ""}`);
+      }
       sessionStorage.setItem("adm", key);
       setAuthed(true);
       setRows(await res.json());

@@ -22,6 +22,24 @@ function guard(req, table) {
   return null;
 }
 
+/* PostgREST errors come back as {message, code, hint, details}. Surface
+   them verbatim — a bare "supabase error" hides the one thing you need.
+   403/42501 almost always means the key in SUPABASE_SERVICE_ROLE_KEY is
+   an anon/publishable key, so RLS is applying instead of being bypassed. */
+function sbError(r) {
+  const d = r.data;
+  const msg =
+    (d && typeof d === "object" && (d.message || d.error || d.hint)) ||
+    (typeof d === "string" && d) ||
+    `supabase ${r.status}`;
+  const code = d && typeof d === "object" && d.code ? ` [${d.code}]` : "";
+  const hint =
+    r.status === 403
+      ? " — 403 from Supabase usually means SUPABASE_SERVICE_ROLE_KEY holds an anon/publishable key rather than the service_role (secret) key."
+      : "";
+  return `${msg}${code}${hint}`;
+}
+
 async function sb(method, path, body) {
   const res = await fetch(`${URL_}/rest/v1/${path}`, {
     method,
@@ -46,7 +64,7 @@ export async function GET(req, { params }) {
   if (denied) return denied;
   const order = table === "intake" ? "created_at.desc" : "sort.asc";
   const r = await sb("GET", `${table}?select=*&order=${order}`);
-  return r.ok ? NextResponse.json(r.data) : bad(r.status, "supabase error");
+  return r.ok ? NextResponse.json(r.data) : bad(r.status, sbError(r));
 }
 
 export async function POST(req, { params }) {
@@ -75,5 +93,5 @@ export async function DELETE(req, { params }) {
   const { id } = await req.json();
   if (!id) return bad(400, "id required");
   const r = await sb("DELETE", `${table}?id=eq.${encodeURIComponent(id)}`);
-  return r.ok ? NextResponse.json({ ok: true }) : bad(r.status, "supabase error");
+  return r.ok ? NextResponse.json({ ok: true }) : bad(r.status, sbError(r));
 }

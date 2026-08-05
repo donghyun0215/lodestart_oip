@@ -222,11 +222,7 @@ export default function ChallengeCard({ c }) {
       </div>
 
       <div className="c-card-body">
-        <div className="c-card-top">
-          <span className="c-sector">{p(c, "sector")}</span>
-          <span className="c-fn">{p(c, "fn")}</span>
-        </div>
-
+        <span className="c-fn">{p(c, "fn")}</span>
         <h3>{p(c, "title")}</h3>
 
         <div className="c-tags">
@@ -240,7 +236,12 @@ export default function ChallengeCard({ c }) {
 
         <p className="c-desc">{p(c, "desc")}</p>
 
-        <div className="c-prize">{p(c, "prize")}</div>
+        <div className="c-quickfacts">
+          <span className="c-prize">{p(c, "prize")}</span>
+          <span className={`c-deadline ${c.status === "closing" ? "closing" : ""}`}>
+            {c.status === "closing" ? t("oi_closing_soon") : t("oi_end_date")} {c.deadline}
+          </span>
+        </div>
 
         <div className="c-owner">
           {/* Drop a file into /public/logos and set `ownerLogo` in lib/data.js to swap the initials chip */}
@@ -249,9 +250,9 @@ export default function ChallengeCard({ c }) {
               <Image
                 src={c.ownerLogo}
                 alt={c.owner}
-                width={Math.round(((c.ownerLogoW ?? 300) / 96) * 28)}
-                height={28}
-                style={{ height: 28, width: "auto" }}
+                width={Math.round(((c.ownerLogoW ?? 300) / 96) * 20)}
+                height={20}
+                style={{ height: 20, width: "auto" }}
                 unoptimized
               />
             </span>
@@ -259,15 +260,8 @@ export default function ChallengeCard({ c }) {
             <span className="c-owner-mark">{c.ownerMark}</span>
           )}
           <span className="c-owner-name">{p(c, "owner")}</span>
+          <span className="c-platform-pill">{c.platform}</span>
         </div>
-      </div>
-
-      <div className={`c-card-foot ${c.status === "closing" ? "closing" : ""}`}>
-        <span className="c-platform">{c.platform}</span>
-        <span>
-          {c.status === "closing" ? t("oi_closing_soon") + " " : t("oi_end_date") + " "}
-          {c.deadline}
-        </span>
       </div>
     </Link>
   );

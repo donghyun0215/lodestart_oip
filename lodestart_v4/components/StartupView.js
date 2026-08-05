@@ -33,11 +33,32 @@ export default function StartupView({ slug }) {
   if (!s) notFound();
 
   return (
-    <section className="section">
+    <section className="section onepager">
       <div className="wrap">
-        <Link href="/startups" className="back-link">
-          <span aria-hidden="true">←</span> {t("co_back")}
-        </Link>
+        {/* one-pager toolbar — hidden on print */}
+        <div className="op-toolbar no-print">
+          <Link href="/startups" className="back-link">
+            <span aria-hidden="true">←</span> {t("co_back")}
+          </Link>
+          <div className="op-actions">
+            <button type="button" className="btn btn-outline btn-sm" onClick={() => window.print()}>
+              {t("d_download_pdf")}
+            </button>
+            <a
+              href={`mailto:hello@lodestart.ai?subject=${encodeURIComponent(`1:1 meeting — ${s.name}`)}`}
+              className="btn btn-orange btn-sm"
+            >
+              {t("d_book_meeting")}
+            </a>
+          </div>
+        </div>
+
+        {s.track && (
+          <p className="op-track">
+            {s.programme}
+            {s.edition ? ` ${s.edition}` : ""} · {p(s, "track")}
+          </p>
+        )}
 
         <div className="detail-layout">
           {/* ---------- MAIN ---------- */}
@@ -95,7 +116,11 @@ export default function StartupView({ slug }) {
 
               {p(s, "achievements").length > 0 && (
                 <Section title={t("d_achievements")}>
-                  <Bullets items={p(s, "achievements")} />
+                  <div className="snapshot-band">
+                    {p(s, "achievements").map((a, k) => (
+                      <div key={k} className="snapshot-tile">{a}</div>
+                    ))}
+                  </div>
                 </Section>
               )}
 
@@ -146,6 +171,24 @@ export default function StartupView({ slug }) {
                       {t("d_website")}
                     </a>
                     <small>{s.website.replace(/^https?:\/\//, "")}</small>
+                  </div>
+                </div>
+              )}
+              {s.contact?.email && (
+                <div className="side-row">
+                  <span className="ico" aria-hidden="true">✉</span>
+                  <div>
+                    <a href={`mailto:${s.contact.email}`}>{t("d_email")}</a>
+                    <small>{s.contact.email}</small>
+                  </div>
+                </div>
+              )}
+              {s.contact?.phone && (
+                <div className="side-row">
+                  <span className="ico" aria-hidden="true">☎</span>
+                  <div>
+                    <span>{t("d_phone")}</span>
+                    <small>{s.contact.phone}</small>
                   </div>
                 </div>
               )}

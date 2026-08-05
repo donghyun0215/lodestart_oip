@@ -4,10 +4,19 @@ import Reveal from "@/components/Reveal";
 import { useLang } from "@/components/LanguageProvider";
 
 /* ------------------------------------------------------------------
-   Insights — practical LinkedIn field notes as a horizontal carousel.
-   Cards deep-link to the original LinkedIn posts (new tab). Posts are
-   maintained by hand in lib/data.js → INSIGHTS.
+   Insights — practical field notes as a horizontal carousel. Source
+   can be LinkedIn, Medium, or any external article — each gets its
+   own badge; unrecognised sources fall back to a generic link mark.
+   Cards deep-link to the original post (new tab). Posts are
+   maintained by hand in lib/data.js → INSIGHTS, or via /admin.
 ------------------------------------------------------------------- */
+
+const SOURCE_BADGE = {
+  linkedin: { label: "in", className: "ins-badge-linkedin" },
+  medium: { label: "M", className: "ins-badge-medium" },
+  article: { label: "◆", className: "ins-badge-article" },
+};
+const badgeFor = (source) => SOURCE_BADGE[source] ?? SOURCE_BADGE.article;
 export default function InsightsView({ posts }) {
   const { t, p } = useLang();
   const trackRef = useRef(null);
@@ -58,7 +67,9 @@ export default function InsightsView({ posts }) {
                   rel="noopener noreferrer"
                 >
                   <span className="ins-band">
-                    <span className="ins-in" aria-hidden="true">in</span>
+                    <span className={`ins-badge ${badgeFor(post.source).className}`} aria-hidden="true">
+                      {badgeFor(post.source).label}
+                    </span>
                     <span className="ins-tag">{p(post, "tag")}</span>
                   </span>
                   <b className="ins-title">{p(post, "title")}</b>

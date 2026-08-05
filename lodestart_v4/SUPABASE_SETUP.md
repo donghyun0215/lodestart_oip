@@ -23,6 +23,7 @@ create table events (
 
 create table insights (
   id bigint generated always as identity primary key,
+  source text default 'linkedin', -- 'linkedin' | 'medium' | 'article'
   tag text, tag_ko text,
   title text not null, title_ko text,
   url text not null,
