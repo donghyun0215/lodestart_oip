@@ -2132,3 +2132,70 @@ html[lang="ko"] .org-desc { word-break: keep-all; }
   a[href]::after { content: none !important; }
   body { color: #000; }
 }
+
+/* ================================================================
+   KIP Monthly — newsletter reader + archive band (nlp-*)
+   82 Startup-style: one narrow column, When/Where/What rows.
+================================================================ */
+.nlp-wrap { max-width: 720px; }
+.nlp-back { display: inline-block; font-size: 13px; color: var(--ink-faint); margin-bottom: 14px; }
+.nlp-back:hover { color: var(--orange-dark); }
+.nlp-intro { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 34px; }
+
+.nlp-item { border-top: 1px solid var(--line); padding: 26px 0 30px; }
+.nlp-item-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.01em; }
+.nlp-body { font-size: 14.5px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 16px; }
+
+.nlp-rows { display: grid; gap: 8px; margin-bottom: 18px; }
+.nlp-row { display: grid; grid-template-columns: 74px 1fr; gap: 12px; font-size: 14.5px; line-height: 1.65; }
+.nlp-row dt { font-weight: 700; color: var(--ink); }
+.nlp-row dd { color: var(--ink-soft); }
+
+.nlp-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.nlp-btn { font-size: 13.5px; padding: 9px 16px; }
+
+.nlp-events { list-style: none; display: grid; gap: 0; }
+.nlp-events li { display: grid; grid-template-columns: 108px 1fr auto; align-items: center; gap: 12px;
+  padding: 11px 0; border-bottom: 1px dashed var(--line); font-size: 14.5px; }
+.nlp-events li:last-child { border-bottom: 0; }
+.nlp-ev-tag { font-size: 11.5px; font-weight: 700; color: var(--orange-dark); background: var(--orange-badge-bg);
+  border: 1px solid var(--orange-badge); border-radius: 999px; padding: 3px 10px; justify-self: start; white-space: nowrap; }
+.nlp-ev-when { font-size: 13px; color: var(--ink-faint); white-space: nowrap; }
+
+.nlp-spot { background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px 22px; }
+.nlp-spot-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+.nlp-spot-head b { font-size: 15.5px; }
+.nlp-spot-head span { font-size: 12.5px; color: var(--ink-faint); }
+.nlp-spot p { font-size: 14px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 10px; }
+.nlp-more { font-size: 13.5px; font-weight: 600; color: var(--orange-dark); }
+.nlp-more:hover { text-decoration: underline; }
+
+.nlp-submit { background: linear-gradient(140deg, #fff 55%, #f0fdf4 100%); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 24px; margin-top: 6px; }
+.nlp-subcard { margin-top: 34px; }
+
+/* archive band on /insights */
+.nlp-archive { display: grid; grid-template-columns: 280px 1fr; gap: 28px; margin-bottom: 46px;
+  padding: 26px; border: 1px solid var(--line); border-radius: var(--radius-lg);
+  background: linear-gradient(140deg, #fff 55%, #f0fdf4 100%); }
+.nlp-archive-copy h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+.nlp-archive-copy p { font-size: 13.5px; line-height: 1.65; color: var(--ink-soft); }
+.nlp-archive-list { display: grid; gap: 10px; align-content: start; }
+.nlp-issue { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 14px;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 13px 16px;
+  font-size: 14px; transition: border-color .15s, box-shadow .15s; }
+.nlp-issue:hover { border-color: var(--orange-badge); box-shadow: var(--shadow-card); }
+.nlp-issue-vol { font-size: 11.5px; font-weight: 700; color: var(--orange-dark); background: var(--orange-badge-bg);
+  border: 1px solid var(--orange-badge); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+.nlp-issue b { font-weight: 600; }
+.nlp-issue-date { font-size: 12.5px; color: var(--ink-faint); white-space: nowrap; }
+.nlp-issue-read { font-size: 12.5px; font-weight: 600; color: var(--orange-dark); white-space: nowrap; }
+.nlp-issue-submit { grid-template-columns: 1fr auto; border-style: dashed; }
+
+@media (max-width: 760px) {
+  .nlp-archive { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+  .nlp-issue { grid-template-columns: auto 1fr; grid-auto-rows: auto; }
+  .nlp-issue-date { display: none; }
+  .nlp-events li { grid-template-columns: 1fr; gap: 4px; }
+  .nlp-ev-when { justify-self: start; }
+}

@@ -1,7 +1,9 @@
 "use client";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import Reveal from "@/components/Reveal";
 import { useLang } from "@/components/LanguageProvider";
+import { NEWSLETTER_ISSUES } from "@/lib/newsletter";
 
 /* ------------------------------------------------------------------
    Insights — practical field notes as a horizontal carousel. Source
@@ -17,8 +19,27 @@ const SOURCE_BADGE = {
   article: { label: "◆", className: "ins-badge-article" },
 };
 const badgeFor = (source) => SOURCE_BADGE[source] ?? SOURCE_BADGE.article;
+const MONTHLY_L = {
+  en: {
+    head: "KIP Monthly",
+    sub: "Our monthly round-up — programmes, events, and one company worth your attention. Community submissions welcome.",
+    read: "Read issue",
+    submit_t: "Have news for the next issue?",
+    submit_cta: "Submit an update",
+  },
+  ko: {
+    head: "KIP 먼슬리",
+    sub: "매달 발행하는 브리핑 — 프로그램, 이벤트, 그리고 주목할 기업 한 곳. 커뮤니티 제보를 환영합니다.",
+    read: "이번 호 읽기",
+    submit_t: "다음 호에 실을 소식이 있나요?",
+    submit_cta: "소식 제보하기",
+  },
+};
+
 export default function InsightsView({ posts }) {
-  const { t, p } = useLang();
+  const { t, p, lang } = useLang();
+  const ml = MONTHLY_L[lang] ?? MONTHLY_L.en;
+  const issues = [...NEWSLETTER_ISSUES].reverse(); // newest first
   const trackRef = useRef(null);
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
@@ -50,6 +71,28 @@ export default function InsightsView({ posts }) {
 
       <section className="section">
         <div className="wrap">
+          <Reveal>
+            <div className="nlp-archive">
+              <div className="nlp-archive-copy">
+                <h2>{ml.head}</h2>
+                <p>{ml.sub}</p>
+              </div>
+              <div className="nlp-archive-list">
+                {issues.map((i) => (
+                  <Link className="nlp-issue" key={i.id} href={`/insights/monthly/${i.id}`}>
+                    <span className="nlp-issue-vol">{i.vol}</span>
+                    <b>{p(i, "title")}</b>
+                    <span className="nlp-issue-date">{p(i, "dateLabel")}</span>
+                    <span className="nlp-issue-read">{ml.read} <span aria-hidden="true">→</span></span>
+                  </Link>
+                ))}
+                <Link className="nlp-issue nlp-issue-submit" href="/contact">
+                  <b>{ml.submit_t}</b>
+                  <span className="nlp-issue-read">{ml.submit_cta} <span aria-hidden="true">→</span></span>
+                </Link>
+              </div>
+            </div>
+          </Reveal>
           <Reveal>
             <div className="ins-head">
               <div className="ins-arrows">
