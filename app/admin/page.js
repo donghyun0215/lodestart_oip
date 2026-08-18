@@ -361,7 +361,11 @@ export default function AdminPage() {
                       <>
                         {" · "}
                         <a href={`/insights/monthly/${r.slug}`} target="_blank" rel="noreferrer" style={{ color: "var(--orange-dark)" }}>
-                          /insights/monthly/{r.slug} ↗
+                          미리보기 ↗
+                        </a>
+                        {" · "}
+                        <a href={`/insights/monthly/${r.slug}/email`} target="_blank" rel="noreferrer" style={{ color: "var(--orange-dark)" }}>
+                          이메일용 (Substack 복붙) ↗
                         </a>
                       </>
                     )}
