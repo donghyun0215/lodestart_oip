@@ -53,7 +53,7 @@ export default function InsightsView({ posts, issues: issuesProp }) {
     const body = encodeURIComponent(
       `Please add this address to the K-Innovation Partners briefing:\n\n${email}`
     );
-    window.location.href = `mailto:Admin@lodestart.ai?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:support@lodestart.ai?subject=${subject}&body=${body}`;
     setSent(true);
   };
 

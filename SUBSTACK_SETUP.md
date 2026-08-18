@@ -15,7 +15,7 @@ Substack이 **발송 채널(이메일)** 역할을 합니다. 82 Startup과 동�
 ## 2. 구독자 가져오기
 - Settings → Subscribers → **Import** → CSV 업로드 (이메일 1열이면 충분)
 - 현재 사이트 구독 폼은 Admin@lodestart.ai 로 메일이 오는 방식 → 받은 주소를
-  모아 CSV로 정리해 임포트. (추후: intake처럼 Supabase `subscribers` 테이블로
+  모아 CSV로 정리해 임포트 (구독 신청 메일은 support@lodestart.ai 로 수신됨). (추후: intake처럼 Supabase `subscribers` 테이블로
   자동 수집하는 확장 가능 — /admin 확장 아이디어에 있음)
 - **주의**: 동의 없이 수집한 주소 대량 임포트는 Substack 정책 위반. 구독
   신청·명함 교환 등 접점이 있는 주소만.

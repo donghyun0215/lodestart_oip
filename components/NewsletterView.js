@@ -56,7 +56,7 @@ export default function NewsletterView({ issue }) {
     const body = encodeURIComponent(
       `Please add this address to KIP Monthly:\n\n${email}`
     );
-    window.location.href = `mailto:Admin@lodestart.ai?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:support@lodestart.ai?subject=${subject}&body=${body}`;
     setSent(true);
   };
 
