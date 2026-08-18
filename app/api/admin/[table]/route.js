@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
    Table names are whitelisted; anything else 404s.
 ------------------------------------------------------------------- */
 
-const TABLES = new Set(["events", "insights", "intake"]);
+const TABLES = new Set(["events", "insights", "intake", "newsletter_issues"]);
 const URL_ = process.env.SUPABASE_URL;
 const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 

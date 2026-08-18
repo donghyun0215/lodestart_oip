@@ -35,6 +35,61 @@ const INSIGHT_FIELDS = [
   ["sort", "정렬 순서 (숫자)", "1"],
 ];
 
+const NEWSLETTER_FIELDS = [
+  ["slug", "URL 아이디 (숫자/영문, 예: 2)", "2"],
+  ["vol", "호수 표기", "Vol. 2"],
+  ["title", "Title (EN)", "September highlights"],
+  ["title_ko", "제목 (KO)", "9월의 하이라이트"],
+  ["date_label", "발행월 (EN)", "September 2026"],
+  ["date_label_ko", "발행월 (KO)", "2026년 9월"],
+  ["sort", "정렬 순서 (숫자)", "2"],
+];
+
+/* /admin에서 "본문 템플릿 불러오기"를 누르면 채워지는 data(jsonb) 뼈대.
+   비울 섹션은 키째로 지우면 페이지에서 렌더링되지 않습니다. */
+const NEWSLETTER_DATA_TEMPLATE = JSON.stringify(
+  {
+    intro: "Hello from K-Innovation Partners! ...",
+    intro_ko: "K-Innovation Partners입니다! ...",
+    highlight: {
+      emoji: "🎉",
+      title: "Event name",
+      title_ko: "이벤트명",
+      rows: [
+        { k: "When", k_ko: "일시", v: "…", v_ko: "…" },
+        { k: "Where", k_ko: "장소", v: "…", v_ko: "…" },
+        { k: "What", k_ko: "내용", v: "…", v_ko: "…" },
+      ],
+      links: [{ label: "Sign up", label_ko: "신청하기", href: "/contact" }],
+    },
+    events: [
+      { tag: "Demo Day", tag_ko: "데모데이", title: "…", title_ko: "…", when: "…", when_ko: "…" },
+    ],
+    spotlight: {
+      slug: "willog",
+      name: "Company Inc.",
+      programme: "KIMST · Track 1",
+      sector: "…",
+      sector_ko: "…",
+      blurb: "…",
+      blurb_ko: "…",
+      href: "/startups/willog",
+    },
+    services: {
+      emoji: "💼",
+      title: "IR deck review & expert advisory",
+      title_ko: "IR 덱 리뷰 & 전문가 자문",
+      body: "…",
+      body_ko: "…",
+      cta: "Request a review",
+      cta_ko: "리뷰 요청하기",
+      href: "mailto:hello@lodestart.ai",
+    },
+  },
+  null,
+  2
+);
+
 const empty = (fields) =>
   Object.fromEntries(fields.map(([k]) => [k, k === "sort" ? "99" : ""]));
 
@@ -46,9 +101,13 @@ export default function AdminPage() {
   const [rows, setRows] = useState([]);
   const [busy, setBusy] = useState(false);
   const [draft, setDraft] = useState(empty(EVENT_FIELDS));
+  const [dataText, setDataText] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const fields = tab === "events" ? EVENT_FIELDS : INSIGHT_FIELDS;
+  const fields =
+    tab === "events" ? EVENT_FIELDS
+    : tab === "newsletter_issues" ? NEWSLETTER_FIELDS
+    : INSIGHT_FIELDS;
 
   const api = useCallback(
     async (method, table, body) => {
@@ -118,10 +177,18 @@ export default function AdminPage() {
   const save = async (e) => {
     e.preventDefault();
     const payload = { ...draft, sort: Number(draft.sort) || 99, published: draft.published ?? true };
+    if (tab === "newsletter_issues") {
+      try {
+        payload.data = dataText.trim() ? JSON.parse(dataText) : {};
+      } catch {
+        return setErr("본문 JSON 형식이 잘못됐습니다 — 괄호/따옴표/쉼표를 확인하세요.");
+      }
+    }
     try {
       if (editingId != null) await api("PATCH", tab, { id: editingId, ...payload });
       else await api("POST", tab, payload);
       setDraft(empty(fields));
+      setDataText("");
       setEditingId(null);
       load();
     } catch (e2) {
@@ -137,6 +204,8 @@ export default function AdminPage() {
   const startEdit = (r) => {
     setEditingId(r.id);
     setDraft(Object.fromEntries(fields.map(([k]) => [k, r[k] ?? ""])));
+    if (tab === "newsletter_issues")
+      setDataText(r.data ? JSON.stringify(r.data, null, 2) : "");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -185,6 +254,7 @@ export default function AdminPage() {
           {[
             ["events", "이벤트"],
             ["insights", "인사이트 (링크드인)"],
+            ["newsletter_issues", "먼슬리 (뉴스레터)"],
             ["intake", "문의 인박스"],
           ].map(([v, label]) => (
             <button
@@ -193,7 +263,12 @@ export default function AdminPage() {
               onClick={() => {
                 setTab(v);
                 setEditingId(null);
-                setDraft(empty(v === "events" ? EVENT_FIELDS : INSIGHT_FIELDS));
+                setDraft(empty(
+                  v === "events" ? EVENT_FIELDS
+                  : v === "newsletter_issues" ? NEWSLETTER_FIELDS
+                  : INSIGHT_FIELDS
+                ));
+                setDataText("");
               }}
             >
               {label}
@@ -222,6 +297,30 @@ export default function AdminPage() {
                 </label>
               ))}
             </div>
+            {tab === "newsletter_issues" && (
+              <label className="adm-field" style={{ display: "block" }}>
+                <span style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  본문 JSON (intro / highlight / events / spotlight / services)
+                  <button
+                    type="button"
+                    className="btn btn-outline btn-sm"
+                    onClick={() => setDataText(NEWSLETTER_DATA_TEMPLATE)}
+                  >
+                    본문 템플릿 불러오기
+                  </button>
+                </span>
+                <textarea
+                  className="nl-input"
+                  style={{ marginBottom: 0, minHeight: 260, fontFamily: "ui-monospace, monospace", fontSize: 12.5, lineHeight: 1.55 }}
+                  placeholder='{"intro": "...", "events": [...] } — 우측 버튼으로 템플릿을 불러와 수정하세요'
+                  value={dataText}
+                  onChange={(e) => setDataText(e.target.value)}
+                />
+                <span style={{ fontSize: 11.5, color: "var(--ink-faint)" }}>
+                  섹션을 빼려면 해당 키를 통째로 지우면 됩니다. 저장 전 JSON 형식을 검사합니다.
+                </span>
+              </label>
+            )}
             <div style={{ display: "flex", gap: 10 }}>
               <button className="btn btn-orange btn-sm">{editingId != null ? "저장" : "추가"}</button>
               {editingId != null && (
@@ -258,6 +357,14 @@ export default function AdminPage() {
                   <b>{r.title}</b>
                   <span className="adm-sub">
                     {r.title_ko} · {tab === "events" ? r.when_text : r.date_label} · sort {r.sort}
+                    {tab === "newsletter_issues" && r.slug && (
+                      <>
+                        {" · "}
+                        <a href={`/insights/monthly/${r.slug}`} target="_blank" rel="noreferrer" style={{ color: "var(--orange-dark)" }}>
+                          /insights/monthly/{r.slug} ↗
+                        </a>
+                      </>
+                    )}
                   </span>
                 </div>
               )}

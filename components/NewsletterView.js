@@ -61,6 +61,8 @@ export default function NewsletterView({ issue }) {
   };
 
   const hi = issue.highlight;
+  const sp = issue.spotlight;
+  const sv = issue.services;
 
   return (
     <>
@@ -80,13 +82,14 @@ export default function NewsletterView({ issue }) {
           </Reveal>
 
           {/* headline item — When / Where / What */}
+          {hi && (
           <Reveal>
             <article className="nlp-item">
               <h2 className="nlp-item-title">
                 <span aria-hidden="true">{hi.emoji}</span> {p(hi, "title")}
               </h2>
               <dl className="nlp-rows">
-                {hi.rows.map((r) => (
+                {(hi.rows ?? []).map((r) => (
                   <div className="nlp-row" key={r.k}>
                     <dt>{lang === "ko" ? r.k_ko : r.k}</dt>
                     <dd>{lang === "ko" ? r.v_ko : r.v}</dd>
@@ -94,7 +97,7 @@ export default function NewsletterView({ issue }) {
                 ))}
               </dl>
               <div className="nlp-links">
-                {hi.links.map((l) => (
+                {(hi.links ?? []).map((l) => (
                   <Link className="btn btn-orange nlp-btn" key={l.href} href={l.href}>
                     {lang === "ko" ? l.label_ko : l.label}
                   </Link>
@@ -102,8 +105,10 @@ export default function NewsletterView({ issue }) {
               </div>
             </article>
           </Reveal>
+          )}
 
           {/* upcoming — Tammy-confirmed list, compact rows */}
+          {Array.isArray(issue.events) && issue.events.length > 0 && (
           <Reveal>
             <article className="nlp-item">
               <h2 className="nlp-item-title">📅 {t("upcoming")}</h2>
@@ -118,37 +123,42 @@ export default function NewsletterView({ issue }) {
               </ul>
             </article>
           </Reveal>
+          )}
 
           {/* spotlight */}
+          {sp && (
           <Reveal>
             <article className="nlp-item">
               <h2 className="nlp-item-title">🔦 {t("spotlight")}</h2>
               <div className="nlp-spot">
                 <div className="nlp-spot-head">
-                  <b>{issue.spotlight.name}</b>
-                  <span>{issue.spotlight.programme} · {p(issue.spotlight, "sector")}</span>
+                  <b>{sp.name}</b>
+                  <span>{sp.programme} · {p(sp, "sector")}</span>
                 </div>
-                <p>{p(issue.spotlight, "blurb")}</p>
-                <Link className="nlp-more" href={issue.spotlight.href}>
+                <p>{p(sp, "blurb")}</p>
+                <Link className="nlp-more" href={sp.href}>
                   {t("view")} <span aria-hidden="true">↗</span>
                 </Link>
               </div>
             </article>
           </Reveal>
+          )}
 
           {/* member services */}
+          {sv && (
           <Reveal>
             <article className="nlp-item">
               <h2 className="nlp-item-title">
-                <span aria-hidden="true">{issue.services.emoji}</span>{" "}
-                {p(issue.services, "title")}
+                <span aria-hidden="true">{sv.emoji}</span>{" "}
+                {p(sv, "title")}
               </h2>
-              <p className="nlp-body">{p(issue.services, "body")}</p>
-              <a className="btn btn-orange nlp-btn" href={issue.services.href}>
-                {lang === "ko" ? issue.services.cta_ko : issue.services.cta}
+              <p className="nlp-body">{p(sv, "body")}</p>
+              <a className="btn btn-orange nlp-btn" href={sv.href}>
+                {lang === "ko" ? sv.cta_ko : sv.cta}
               </a>
             </article>
           </Reveal>
+          )}
 
           {/* submit for next month */}
           <Reveal>

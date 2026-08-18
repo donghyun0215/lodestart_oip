@@ -36,10 +36,10 @@ const MONTHLY_L = {
   },
 };
 
-export default function InsightsView({ posts }) {
+export default function InsightsView({ posts, issues: issuesProp }) {
   const { t, p, lang } = useLang();
   const ml = MONTHLY_L[lang] ?? MONTHLY_L.en;
-  const issues = [...NEWSLETTER_ISSUES].reverse(); // newest first
+  const issues = [...(issuesProp ?? NEWSLETTER_ISSUES)].reverse(); // newest first
   const trackRef = useRef(null);
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);

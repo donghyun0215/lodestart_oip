@@ -41,6 +41,21 @@ create table intake (
   created_at timestamptz default now()
 );
 
+-- KIP Monthly (뉴스레터). 아카이브 카드용 스칼라 컬럼 + 본문은 data(jsonb) 하나.
+-- 이미 위 3개 테이블을 만든 상태라면 이 블록만 따로 실행하면 됩니다.
+create table newsletter_issues (
+  id bigint generated always as identity primary key,
+  slug text not null unique,        -- URL: /insights/monthly/<slug>
+  vol text,                         -- "Vol. 2"
+  title text not null, title_ko text,
+  date_label text, date_label_ko text,
+  data jsonb not null default '{}'::jsonb,  -- intro/highlight/events/spotlight/services (admin의 템플릿 참고)
+  published boolean default true,
+  sort int default 99,
+  created_at timestamptz default now()
+);
+alter table newsletter_issues enable row level security;
+
 -- 서비스 키로만 접근하므로 RLS는 잠가둡니다 (외부 직접 접근 차단)
 alter table events enable row level security;
 alter table insights enable row level security;
