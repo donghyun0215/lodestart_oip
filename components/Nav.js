@@ -17,6 +17,7 @@ export default function Nav() {
     { href: "/open-innovation", label: t("nav_oi") },
     { href: "/events", label: t("nav_events") },
     { href: "/insights", label: t("nav_newsletter") },
+    { href: "/investors", label: t("nav_investors") },
     { href: "/outreach", label: t("nav_outreach") },
   ];
 
