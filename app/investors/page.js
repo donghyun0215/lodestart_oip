@@ -244,20 +244,22 @@ export default function InvestorsPage() {
           </div>
 
           {list.length > shown && (
-            <div style={{ textAlign: "center", marginTop: 28 }}>
+            <div className="inv-more">
               <button
                 type="button"
-                className="btn btn-ghost"
+                className="btn btn-black"
                 onClick={() => setShown((n) => n + 36)}
               >
-                {shown.toLocaleString()} / {list.length.toLocaleString()}
+                {t("inv_more")}
               </button>
+              <span className="inv-more-count">
+                {shown.toLocaleString()} / {list.length.toLocaleString()}
+              </span>
             </div>
           )}
 
           {list.length === 0 && <p className="empty-note">{t("inv_none")}</p>}
 
-          <p className="inv-privacy">{t("inv_privacy")}</p>
         </div>
       </section>
 
@@ -380,11 +382,16 @@ export default function InvestorsPage() {
         .inv-card-foot :global(.btn) {
           margin-left: auto;
         }
-        .inv-privacy {
+        .inv-more {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
           margin-top: 34px;
+        }
+        .inv-more-count {
           font-size: 12px;
           color: var(--muted, #6b7280);
-          text-align: center;
         }
         @media (max-width: 560px) {
           .inv-stats {
@@ -459,9 +466,6 @@ function RequestModal({ fund, onClose }) {
         {sent ? (
           <div style={{ padding: "16px 4px" }}>
             <h3 style={{ margin: "0 0 10px" }}>{t("inv_sent")}</h3>
-            <p style={{ fontSize: 13.5, color: "var(--muted, #6b7280)", margin: 0 }}>
-              {t("inv_privacy")}
-            </p>
           </div>
         ) : (
           <>
