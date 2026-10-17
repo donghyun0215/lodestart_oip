@@ -510,10 +510,14 @@ export function SeasonStack() {
                       <a className="sx-btn" href={e.url} target="_blank" rel="noopener noreferrer">
                         {done ? l.visit : l.rsvp} <span aria-hidden="true">{Ico.out}</span>
                       </a>
-                      {e.programme && (
+                      {e.programme ? (
                         <Link className="sx-link" href={`/startups?programme=${e.programme}`}>
                           {l.companies} <span aria-hidden="true">→</span>
                         </Link>
+                      ) : (
+                        <a className="sx-link" href={`${e.url}#startups`} target="_blank" rel="noopener noreferrer">
+                          {l.companies} <span aria-hidden="true">↗</span>
+                        </a>
                       )}
                     </div>
                   </div>
