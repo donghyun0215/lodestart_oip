@@ -2248,7 +2248,7 @@ html[lang="ko"] .org-desc { word-break: keep-all; }
 }
 .sx-eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34,197,94,.7); animation: sxPulse 2s infinite; }
 @keyframes sxPulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,.6); } 70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
-.sx-h1 { margin: 22px 0 18px; font-size: clamp(2.3rem, 4.9vw, 4.15rem); line-height: 1.02; font-weight: 700; letter-spacing: -0.035em; }
+.sx-h1 { margin: 22px 0 18px; font-size: clamp(2.2rem, 4.5vw, 3.75rem); line-height: 1.02; font-weight: 700; letter-spacing: -0.035em; }
 html[lang="ko"] .sx-h1 { letter-spacing: -0.045em; line-height: 1.12; word-break: keep-all; }
 .sx-mask { display: block; overflow: hidden; padding-bottom: .06em; }
 .sx-line { display: inline-block; animation: sxLineUp .9s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d); }
@@ -2266,7 +2266,7 @@ html[lang="ko"] .sx-sub { word-break: keep-all; }
 
 .sx-stats { display: flex; gap: clamp(22px, 4vw, 44px); margin: 30px 0 30px; animation: sxFadeUp .8s .55s both; }
 .sx-stats div { display: flex; flex-direction: column; }
-.sx-stats b { font-size: clamp(1.9rem, 3.4vw, 2.7rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.sx-stats b { white-space: nowrap; font-size: clamp(1.9rem, 3.4vw, 2.7rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 .sx-stats > div > span { margin-top: 6px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--sx-faint); }
 
 .sx-hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; animation: sxFadeUp .8s .65s both; }
@@ -2504,3 +2504,4 @@ html[lang="ko"] .sx-facts li { word-break: keep-all; }
 .sx-vlist em { font-style: normal; font-size: 12.5px; color: var(--sx-faint); }
 .sx-vlist .sx-badge { font-size: 10px; padding: 4px 9px; flex-shrink: 0; }
 @media (max-width: 680px) { .sx-vlist { display: grid; } }
+@media (max-width: 440px) { .sx-next-k { display: none; } .sx-stats { gap: 20px; } }
