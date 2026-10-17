@@ -6,6 +6,7 @@ import ProgrammeCard from "@/components/ProgrammeCard";
 import Reveal from "@/components/Reveal";
 import { RuleTitle } from "@/components/Bits";
 import { useLang } from "@/components/LanguageProvider";
+import { SeasonHero, SeasonRail, SeasonStack } from "@/components/SeasonShowcase";
 
 export default function EventsView({ events }) {
   const { t, p } = useLang();
@@ -13,30 +14,10 @@ export default function EventsView({ events }) {
   const countFor = (prog) => STARTUPS.filter((x) => prog.companies.includes(x.slug)).length;
   return (
     <>
-      <header className="page-hero">
-        <div className="wrap">
-          <span className="kicker">{t("ev_kicker")}</span>
-          <h1 className="h-section">
-            {t("ev_title_a")} <em className="accent">{t("ev_title_b")}</em>
-          </h1>
-          <p className="sub">{t("ev_sub")}</p>
-        </div>
-      </header>
-
-      <section className="section">
-        <div className="wrap">
-          <div className="feat-grid">
-            {[1, 2, 3].map((i) => (
-              <Reveal key={i} delay={(i - 1) * 60}>
-                <div className="feat-card">
-                  <h3>{t(`ev_${i}_t`)}</h3>
-                  <p>{t(`ev_${i}_d`)}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ---------- FALL 2026 SEASON — the five Singapore programmes ---------- */}
+      <SeasonHero />
+      <SeasonRail />
+      <SeasonStack />
 
       {/* ---------- PROGRAMMES — accelerator programmes are events too ---------- */}
       <section className="section">
